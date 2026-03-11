@@ -19,7 +19,7 @@ copyright = "© 2025 CloudOps Hub. All rights reserved."
 [markup]
   [markup.highlight]
     style          = "github"
-    lineNos        = true
+    lineNos        = false
     lineNumbersInTable = true
     tabWidth       = 2
   [markup.goldmark.renderer]
