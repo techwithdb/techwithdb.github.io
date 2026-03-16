@@ -1,15 +1,15 @@
-baseURL = "https://techwithdb.github.io/"
+baseURL = "https://techwithdb.github.io/techwithdb/"
 languageCode = "en-us"
 title = "TechWithDB"
 [pagination]
   pagerSize = 9
 enableRobotsTXT = true
 enableGitInfo = true
-copyright = "© 2025 CloudOps Hub. All rights reserved."
+copyright = "© 2025 TechWithDB. All rights reserved."
 
 [params]
-  description  = "Practical AWS & DevOps tutorials — real-world projects, deep dives, and interview prep by DB."
-  author       = "CloudOps Hub"
+  description  = "Practical AWS & DevOps tutorials — real-world projects, deep dives, and interview prep by Dipak."
+  author       = "Dipak"
   github       = "https://github.com/yourusername"
   linkedin     = "https://linkedin.com/in/yourprofile"
   twitter      = "https://twitter.com/yourhandle"
