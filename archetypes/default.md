@@ -2,7 +2,7 @@
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
 date: {{ .Date }}
-author: "CloudOps Hub"
+author: "TechWithDB"
 tags: []
 series: ""
 level: "Beginner"
