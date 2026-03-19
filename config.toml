@@ -1,6 +1,6 @@
 baseURL = "https://techwithdb.github.io/techwithdb/"
 languageCode = "en-us"
-title = "TechWithDB"
+title = "TechwithDB"
 [pagination]
   pagerSize = 9
 enableRobotsTXT = true
@@ -38,12 +38,12 @@ copyright = "© 2025 TechWithDB. All rights reserved."
 [menu]
   [[menu.main]]
     name   = "Home"
-    url    = "/"
+    url    = "/techwithdb/"
     weight = 1
 
   [[menu.main]]
     name   = "AWS"
-    url    = "/aws/"
+    url    = "/techwithdb/aws/"
     weight = 2
     [menu.main.params]
       icon   = "fab fa-aws"
@@ -51,29 +51,29 @@ copyright = "© 2025 TechWithDB. All rights reserved."
 
   [[menu.main]]
     name   = "DevOps"
-    url    = "/devops/"
+    url    = "/techwithdb/devops/"
     weight = 3
     [menu.main.params]
       icon   = "fas fa-infinity"
       hasDropdown = true
 
   [[menu.main]]
-    name   = "Interview Q&A"
-    url    = "/interview-questions/"
+    name   = "/Interview Q&A"
+    url    = "techwithdb/interview-questions/"
     weight = 4
     [menu.main.params]
       icon = "fas fa-comments"
 
   [[menu.main]]
     name   = "Blog"
-    url    = "/blog/"
+    url    = "/techwithdb/blog/"
     weight = 5
     [menu.main.params]
       icon = "fas fa-pen-nib"
 
   [[menu.main]]
     name   = "Contact"
-    url    = "/contact/"
+    url    = "/techwithdb/contact/"
     weight = 6
     [menu.main.params]
       icon = "fas fa-envelope"
@@ -84,6 +84,6 @@ copyright = "© 2025 TechWithDB. All rights reserved."
   page    = ["HTML"]
   section = ["HTML", "RSS"]
 
-[sitemap]
+[sitemap] 
   changefreq = "weekly"
   priority   = 0.5
