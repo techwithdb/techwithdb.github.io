@@ -4,7 +4,7 @@ description: "Scenario based EC2 Interview Questions and Answers"
 date: 2026-04-06T15:00:28+05:30
 author: "DB"
 tags: []
-tool: ["AWS","EC2"]       # aws | docker | kubernetes | jenkins | prometheus | grafana
+tool: ""      # aws | docker | kubernetes | jenkins | prometheus | grafana
 level: "All Levels"
 question_count: 30
 draft: false
