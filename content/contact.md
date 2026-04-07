@@ -24,7 +24,7 @@ Use the form below to submit any of the following:
 
 <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin:2rem 0;box-shadow:var(--sh)">
   <iframe
-    src="https://docs.google.com/forms/d/e/YOUR_EMBEDDED_FORM_ID/viewform?embedded=true"
+    src="https://docs.google.com/forms/d/1jLI9Kfy7-lSbBL5GEyq5ye2xX3tqXMABbqn-MmipQXY/edit?pli=1"
     width="100%"
     height="820"
     frameborder="0"
