@@ -11,6 +11,8 @@ question_count: 50
 
 <div class="qa-list">
 
+## 🟢 Basic
+
 {{< qa num="1" q="What is Amazon EC2 and what problems does it solve?" level="basic" >}}
 **Amazon EC2 (Elastic Compute Cloud)** provides resizable virtual servers in the AWS cloud.
 
@@ -240,6 +242,9 @@ ssh -i my-key.pem centos@<public-ip>     # CentOS
 - Supported instance families: C3, C4, C5, M3, M4, M5, R3, R4, R5, T2, T3
 - Not supported on bare metal instances
 {{< /qa >}}
+
+## 🟢 Intermediate
+
 
 {{< qa num="13" q="How does Auto Scaling work? Explain the different scaling policies." level="intermediate" >}}
 **Auto Scaling Group (ASG)** automatically adjusts instance count based on demand.
@@ -518,6 +523,10 @@ aws ec2 modify-instance-attribute \
 
 **Use EFA for:** Tightly-coupled MPI workloads and distributed deep learning (PyTorch DDP, Megatron-LM).
 {{< /qa >}}
+
+
+## 🟢 Advanced
+
 
 {{< qa num="26" q="How do you troubleshoot an EC2 instance that fails status checks?" level="advanced" >}}
 **Two types of status checks:**
