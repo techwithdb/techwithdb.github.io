@@ -7,7 +7,7 @@ tags: ["Kubernetes", "DevOps", "Container Orchestration", "Cloud Native", "K8s"]
 readTime: "18 min read"
 ---
 
-# ☸️ Kubernetes Architecture Deep Dive: Everything You Need to Know
+# ☸️ Kubernetes Architecture Deep Dive (2025): Everything You Need to Know
 
 > *A comprehensive guide to understanding how Kubernetes works under the hood — from the Control Plane to the Worker Nodes, and everything in between.*
 
