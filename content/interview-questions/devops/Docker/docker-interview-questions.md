@@ -1,5 +1,5 @@
 ---
-title: "Docker Interview Questions"
+title: "Docker Interview Questions and Answers"
 description: ""
 date: 2026-04-07T14:26:30+05:30
 author: "DB"
