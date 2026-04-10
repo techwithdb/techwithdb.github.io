@@ -13,36 +13,6 @@ readTime: "18 min read"
 
 ---
 
-## 📋 Table of Contents
-
-- [What is Kubernetes?](#-what-is-kubernetes)
-- [High-Level Architecture Overview](#-high-level-architecture-overview)
-- [Control Plane Components](#-control-plane-components)
-  - [API Server](#1-kube-apiserver)
-  - [etcd](#2-etcd)
-  - [Scheduler](#3-kube-scheduler)
-  - [Controller Manager](#4-kube-controller-manager)
-  - [Cloud Controller Manager](#5-cloud-controller-manager)
-- [Worker Node Components](#-worker-node-components)
-  - [kubelet](#1-kubelet)
-  - [kube-proxy](#2-kube-proxy)
-  - [Container Runtime](#3-container-runtime)
-- [Core Kubernetes Objects](#-core-kubernetes-objects)
-  - [Pods](#pods)
-  - [ReplicaSets](#replicasets)
-  - [Deployments](#deployments)
-  - [Services](#services)
-  - [ConfigMaps & Secrets](#configmaps--secrets)
-  - [Namespaces](#namespaces)
-  - [Volumes & Persistent Volumes](#volumes--persistent-volumes)
-- [Kubernetes Networking Model](#-kubernetes-networking-model)
-- [How a Pod Gets Scheduled — Step by Step](#-how-a-pod-gets-scheduled--step-by-step)
-- [Kubernetes Add-ons](#-kubernetes-add-ons)
-- [Architecture Best Practices](#-architecture-best-practices)
-- [Key Takeaways](#-key-takeaways)
-
----
-
 ## 🌐 What is Kubernetes?
 
 **Kubernetes** (also known as **K8s**) is an open-source container orchestration platform originally developed by Google, now maintained by the **Cloud Native Computing Foundation (CNCF)**. It automates the deployment, scaling, and management of containerized applications.
