@@ -44,8 +44,15 @@ At its core, a Kubernetes cluster is made up of two types of machines:
 - **Control Plane** — The brain 🧠 of Kubernetes. Makes global decisions about the cluster (scheduling, detecting and responding to events).
 - **Worker Nodes** — The muscle 💪 of Kubernetes. Run the actual application workloads (Pods).
 
+
+
 {{< mermaid >}}
 graph TB
+
+%% Cloud 
+subgraph Cloud 
+    A1[Services]
+end
 
 %% Control Plane
 subgraph Control Plane
@@ -53,6 +60,7 @@ subgraph Control Plane
     B2[Scheduler]
     B3[Controller Manager]
     B4[(etcd)]
+    B5[Cloud Controller Manager]
 end
 
 %% Worker Nodes
@@ -60,30 +68,33 @@ subgraph Worker Node 1
     C1[Kubelet]
     C2[Kube Proxy]
     C3[Pod]
+    c4[Container Runtime]
 end
 
 subgraph Worker Node 2
     D1[Kubelet]
     D2[Kube Proxy]
     D3[Pod]
+    D4[Container Runtime]
 end
 
 %% Flow
 B2 --> B1
 B3 --> B1
 B4 --> B1
+B5 <--> B1
+
+B5 <--> A1
 
 B1 --> C1
 B1 --> D1
+B1 --> D2
+B1 --> C2
 
 C1 --> C3
 D1 --> D3
 
-
 {{< /mermaid >}}
-
-
-
 
 
 ---
