@@ -7,7 +7,7 @@ tags: ["Kubernetes", "K8s", "Interview", "DevOps", "Containers", "CKA", "CKAD"]
 tool: "kubernetes"
 level: "All Levels"
 question_count: 50
-draft: false
+draft: true
 ---
 
 <div class="qa-list">

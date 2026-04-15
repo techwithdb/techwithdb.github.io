@@ -5,7 +5,7 @@ date: "2026-04-08"
 author: "DB"
 tags: ["Kubernetes", "DevOps", "Container Orchestration", "Cloud Native", "K8s"]
 readTime: "18 min read"
-cover: "![Kubernetes Architecture](cover.svg)"
+cover: "cover.svg"
 ---
 
 # ☸️ Kubernetes Architecture Deep Dive (2025): Everything You Need to Know
