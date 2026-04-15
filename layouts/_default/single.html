@@ -47,6 +47,11 @@
     <article>
 
       <header class="art-header">
+        {{ with .Params.cover }}
+        <div class="art-cover">
+          <img src="{{ . }}" alt="{{ $.Title }}">
+        </div>
+       {{ end }}
         <div class="art-badges">
           <span class="badge {{ $badge }}">{{ $s | humanize | title }}</span>
           {{ with .Params.level }}<span class="badge" style="background:var(--surface-2);color:var(--ink-3);border:1px solid var(--border)">{{ . }}</span>{{ end }}

@@ -5,6 +5,7 @@ date: "2026-04-08"
 author: "DB"
 tags: ["Kubernetes", "DevOps", "Container Orchestration", "Cloud Native", "K8s"]
 readTime: "18 min read"
+cover: "![Kubernetes Architecture](cover.svg)"
 ---
 
 # ☸️ Kubernetes Architecture Deep Dive (2025): Everything You Need to Know
@@ -18,6 +19,9 @@ readTime: "18 min read"
 **Kubernetes** (also known as **K8s**) is an open-source container orchestration platform originally developed by Google, now maintained by the **Cloud Native Computing Foundation (CNCF)**. It automates the deployment, scaling, and management of containerized applications.
 
 Before Kubernetes, running containers at scale was chaotic — containers had to be manually started, monitored, and restarted when they crashed. Kubernetes solves all of this declaratively: you describe the *desired state* of your system, and Kubernetes continuously works to maintain it.
+
+![Kubernetes Architecture](cover.svg)
+
 
 ### Why Kubernetes?
 
