@@ -12,8 +12,8 @@ canonifyURLs = true
 copyright = "© 2025 TechWithDB. All rights reserved."
 
 [params]
-  description  = "Practical AWS & DevOps tutorials — real-world projects, deep dives, and interview prep by Dipak."
-  author       = "Dipak"
+  description  = "Learn AWS, DevOps, Kubernetes, Terraform, and CI/CD with real-world projects, tutorials, and interview questions."
+  author       = "DB"
   github       = "https://github.com/techwithdb"
   linkedin     = "https://linkedin.com/in/yourprofile"
   twitter      = "https://twitter.com/yourhandle"
@@ -90,4 +90,4 @@ copyright = "© 2025 TechWithDB. All rights reserved."
 
 [sitemap]
   changefreq = "weekly"
-  priority   = 0.5
+  priority   = 0.8
