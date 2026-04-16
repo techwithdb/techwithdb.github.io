@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block admin or unnecessary pages
+Disallow: /admin/
+Disallow: /drafts/
+
+Sitemap: https://techwithdb.com/sitemap.xml
