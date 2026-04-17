@@ -21,27 +21,6 @@ Always include `-n <namespace>` in every `kubectl` command. Without it, kubectl 
 
 ---
 
-## Table of Contents
-
-1. [Cluster Setup & Info](#1-cluster-setup--info)
-2. [Namespaces](#2-namespaces)
-3. [Pods](#3-pods)
-4. [Deployments](#4-deployments)
-5. [Services](#5-services)
-6. [StatefulSets](#6-statefulsets)
-7. [ConfigMaps & Secrets](#7-configmaps--secrets)
-8. [Persistent Volumes & Storage](#8-persistent-volumes--storage)
-9. [Ingress](#9-ingress)
-10. [Horizontal Pod Autoscaler (HPA)](#10-horizontal-pod-autoscaler-hpa)
-11. [Apply, Delete & Dry Run](#11-apply-delete--dry-run)
-12. [Labels & Selectors](#12-labels--selectors)
-13. [Events & Monitoring](#13-events--monitoring)
-14. [Troubleshooting A to Z](#14-troubleshooting-a-to-z)
-15. [Output Formats & JSONPath](#15-output-formats--jsonpath)
-16. [Quick Reference Cheatsheet](#16-quick-reference-cheatsheet)
-
----
-
 ## 1. Cluster Setup & Info
 
 Before doing anything in Kubernetes, you need to know the state of your cluster — which version it is running, which context you are in, and which nodes are available. These commands answer those questions.
