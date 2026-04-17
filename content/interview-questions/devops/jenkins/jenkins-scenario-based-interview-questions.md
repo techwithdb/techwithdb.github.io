@@ -25,10 +25,10 @@ draft: false
 
 ```
                 ┌─────────────────────────────────────────────────┐
-                │         JENKINS CONTROLLER (HA Pair)             │
-                │  - Job scheduling & orchestration only            │
-                │  - No builds run on controller                    │
-                │  - 8 vCPU / 32GB RAM / 500GB SSD                 │
+                │         JENKINS CONTROLLER (HA Pair)            │
+                │  - Job scheduling & orchestration only          │
+                │  - No builds run on controller                  │
+                │  - 8 vCPU / 32GB RAM / 500GB SSD                │
                 └──────────────────┬──────────────────────────────┘
                                    │
          ┌─────────────────────────┼─────────────────────────────┐
@@ -36,10 +36,11 @@ draft: false
 ┌──────────────────┐   ┌──────────────────┐         ┌──────────────────┐
 │  Static Agents   │   │  Docker Agents   │         │  K8s Pod Agents  │
 │  (Heavy builds)  │   │  (Standard CI)   │         │  (On-demand)     │
-│  4x c5.4xlarge   │   │  Docker-in-Docker│         │  Kubernetes Plugin│
-│  Maven/Gradle    │   │  ephemeral        │         │  Auto-scale      │
+│  4x c5.4xlarge   │   │  Docker-in-Docker│         │ Kubernetes Plugin│
+│  Maven/Gradle    │   │  ephemeral       │         │  Auto-scale      │
 └──────────────────┘   └──────────────────┘         └──────────────────┘
 ```
+
 
 **Key Changes:**
 
@@ -115,16 +116,16 @@ pipeline {
 
 ```
         ┌──────────────────────────────┐
-        │      Route 53 / ALB           │
-        │  (health check every 10s)     │
+        │      Route 53 / ALB          │
+        │  (health check every 10s)    │
         └──────────┬───────────────────┘
                    │
     ┌──────────────┴──────────────┐
     ▼                             ▼
 ┌─────────────────┐     ┌─────────────────┐
-│  Jenkins Active │     │ Jenkins Standby  │
-│  (RUNNING)      │     │  (WARM, stopped) │
-│  EC2: m5.2xl    │     │  EC2: m5.2xl     │
+│  Jenkins Active │     │ Jenkins Standby │
+│  (RUNNING)      │     │ (WARM, stopped) │
+│  EC2: m5.2xl    │     │ EC2: m5.2xl     │
 └────────┬────────┘     └─────────────────┘
          │
          ▼
