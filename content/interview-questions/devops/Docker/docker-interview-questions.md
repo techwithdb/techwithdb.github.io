@@ -655,7 +655,7 @@ kubectl rollout undo deployment/my-app   # Rollback if needed
 ```
 {{< /qa >}}
 
-{{< qa num="7" q="What is the difference between `CMD` and `ENTRYPOINT` in a Dockerfile?" level="Advanced" >}}
+{{< qa num="7" q="What is the difference between `CMD` and `ENTRYPOINT` in a Dockerfile?" level="advanced" >}}
 **Ans:**
 Both define the command that runs when a container starts, but they behave differently:
 
