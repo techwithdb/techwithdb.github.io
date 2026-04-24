@@ -101,56 +101,32 @@ But every setup has its pro's and con's.
 We will overcome problems of setup 1 (Deploy application on single AWS EC2 Instance).
 
 #### **Pro's**:
-1. **High Availability:**
-    - Multiple instances across AZ's so if one AZ's Fails then traffic shif automatically to another ec2 instances
+1. **High Availability:** Multiple instances across AZ's so if one AZ's Fails then traffic shif automatically to another ec2 instances
 
-2. **Automatic Recovery:**
-    - If unhealthy instance found then autoscaling group automatically remove unhealthy instance and create new one.
-    - No manual intervention need to do this
-3. **Horizontal Scaling:**
-    - We cannot do Horizontal scaling in setup 1 but here when traffic increases the ASG will add the instances. 
-    - It handles traffic spikes better than single EC2 Instance
-4. **Simple Structure:**
-    - It is easy to understand
-    - Easy to debug compared to kubernetes
-5. **Cost Control:**
-    - No cluster overhead
-    - Pay per EC2 usage
+2. **Automatic Recovery:** If unhealthy instance found then autoscaling group automatically remove unhealthy instance and create new one. No manual intervention need to do this
+3. **Horizontal Scaling:** We cannot do Horizontal scaling in setup 1 but here when traffic increases the ASG will add the instances. It handles traffic spikes better than single EC2 Instance
+4. **Simple Structure:** It is easy to understand. Easy to debug compared to kubernetes
+5. **Cost Control:** No cluster overhead. Pay per EC2 usage
 
 > Each setup has its con's. Lets discuss what it is?
 
 #### **Con's:**
 
-1. **slow Scaling:**
-    - when new instance is created automatically in autoscaling group then it will take 1 to 3 minute time to up
-    - During spike, user may face latency/ errors
+1. **slow Scaling:** when new instance is created automatically in autoscaling group then it will take 1 to 3 minute time to up. During spike, user may face latency/ errors
 
-2. **Instance level Healing only:**
-    - if app inside EC2 instance crashed then whole EC2 instance will be replaced
-    - No partial recovery in this case. 
-    - You can use systemmd restart policies but it has some limitations.
+2. **Instance level Healing only:** if app inside EC2 instance crashed then whole EC2 instance will be replaced. No partial recovery in this case. You can use systemmd restart policies but it has some limitations.
 
-3. **Deployment complexity:**
-    - To do the deployment, you need to do manually or require some custom scripts. You need to delete all previous ec2 instances and create new one. It will take lots of time.
-    - if new application version inside new instances is not working properly then to do the rollback (deploy previous version) also takes time.
-    - to fix this, you can create new ASG and create the new ec2 instances with new changes in application and redirect traffic from old ASG to new ASG. It will take lots of manual work or require some automation scripts.
+3. **Deployment complexity:** To do the deployment, you need to do manually or require some custom scripts. You need to delete all previous ec2 instances and create new one. It will take lots of time. if new application version inside new instances is not working properly then to do the rollback (deploy previous version) also takes time. To fix this, you can create new ASG and create the new ec2 instances with new changes in application and redirect traffic from old ASG to new ASG. It will take lots of manual work or require some automation scripts.
 
-4. **Resource waste:**
-    - Each instance run full application.
-    - if app is using minimum compute memory then its a waste of resource (CPU and RAM)
+4. **Resource waste:** Each instance run full application. if app is using minimum compute memory then its a waste of resource (CPU and RAM)
 
-5. **Limited Scaling Granularity:**
-    - Scale entire instance, not specific component.
+5. **Limited Scaling Granularity:** Scale entire instance, not specific component.
 
-6. **Configuaration drift:**
-    - Over time, Instances may differ (manual changes, patching)
+6. **Configuaration drift:** Over time, Instances may differ (manual changes, patching)
 
-7. **Observalibility Gaps:**
-    - it is hard to debug distributed issues.
+7. **Observalibility Gaps:** it is hard to debug distributed issues.
 
-8. **Cost at Scale:**
-    - Idle instances still cost money
-    - Overprovisioning for safety occur large amount of cost.
+8. **Cost at Scale:** Idle instances still cost money. Overprovisioning for safety occur large amount of cost.
 
 > Till Now, we are using single monolithic application in autoscaling groups behind the application load balancer. 
 
@@ -178,48 +154,29 @@ We will overcome problems of setup 1 (Deploy application on single AWS EC2 Insta
 
 #### What your setup already solves:
 
-1. **Service Isolation**
-    - Failure in Service A will not crash service B
-    - Independant Scaling Per service
-2. **Better Scalability than Monolithic**
-    - Each microservice scales based on its own Load
-    - No need to scale entire application
-3. **Fault isolation at instance level**
-    - If instance in Service A fails then only that service impacted
-    - ASG replaces it automatically
-4. **Clear ownership model**
-    - each service has its own deployment pipeline
-    - each service has its own scaling policy
-5. **Simpler than Kubernetes**
-    - Easier debugging
-    - Less operational overhead initially
+1. **Service Isolation** Failure in Service A will not crash service B. Independant Scaling Per service
+2. **Better Scalability than Monolithic:** Each microservice scales based on its own Load. No need to scale entire application
+3. **Fault isolation at instance level:** If instance in Service A fails then only that service impacted. ASG replaces it automatically
+4. **Clear ownership model:** each service has its own deployment pipeline. each service has its own scaling policy
+5. **Simpler than Kubernetes:** Easier debugging. Less operational overhead initially
 
 
 #### Problems you will face (this is where reality hits)
 
-1. **Resource fragmentation (huge cost issue)**
-    - Each service has its own EC2 fleet: 
+1. **Resource fragmentation (huge cost issue)** Each service has its own EC2 fleet. You cannot share unused capacity, result is wasted CPU/RAM, Higher AWS Bill
+ 
     ```bash
     Service A → 20% usage
     Service B → 30% usage
     Service C → 10% usage
     ```
-    - You cannot share unused capacity, result is wasted CPU/RAM, Higher AWS Bill
+2. **Slow scaling (minutes vs seconds):** ASG launches EC2. it will takes 1–3 minutes. During spike → latency / errors
 
-2. **Slow scaling (minutes vs seconds)**
-    - ASG launches EC2. it will takes 1–3 minutes
-    - During spike → latency / errors
+3. **Instance-level healing only:** Even with /healthcheck, if service partially failed then either ignore or kill the whole EC2
 
-3. **Instance-level healing only**
-    - Even with /healthcheck, if service partially failed then either ignore or kill the whole EC2
-
-4. **Deployment complexity (big pain at scale)**
-    - With 10 services: 10 pipelines, 10 rolling deployments, Hard rollbacks
-    - Risk of downtime and inconsistency
-5. **Operational overhead explosion**
-    - 10 ASG, 10 launch templates, 10 scaling configs, 10 health checks, it Becomes hard to maintain
-6. **Minimum capacity problem**
-    - Each service need atleast 2 EC2 Instances for High availability. so 10 microservices need atleast 20 instances minimum. evenif traffic is slow
+4. **Deployment complexity (big pain at scale):** With 10 services: 10 pipelines, 10 rolling deployments, Hard rollbacks. Risk of downtime and inconsistency
+5. **Operational overhead explosion:** 10 ASG, 10 launch templates, 10 scaling configs, 10 health checks, it Becomes hard to maintain
+6. **Minimum capacity problem:** Each service need atleast 2 EC2 Instances for High availability. so 10 microservices need atleast 20 instances minimum. evenif traffic is slow
 
 
 > When this setup is perfect
