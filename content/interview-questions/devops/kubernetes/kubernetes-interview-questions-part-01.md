@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Interview Questions & Answers (2025)"
+title: "Kubernetes Interview Questions & Answers (2026) part 01"
 description: "50+ Kubernetes interview questions and answers from basic to advanced — covering Pods, Deployments, Services, Networking, RBAC, Helm, Autoscaling, Security, and real-world troubleshooting scenarios."
 date: 2025-01-20
 author: "DB"

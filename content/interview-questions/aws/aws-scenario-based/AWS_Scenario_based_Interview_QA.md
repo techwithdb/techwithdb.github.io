@@ -1,5 +1,5 @@
 ---
-title: "AWS EC2 Scenario Interview Questions & Answers"
+title: "AWS Scenario Interview Questions & Answers"
 description: "30+ AWS EC2 interview questions covering instance types, Auto Scaling, AMIs, pricing models, networking, storage, and troubleshooting — Basic to Advanced."
 date: 2025-01-20
 author: "DB"

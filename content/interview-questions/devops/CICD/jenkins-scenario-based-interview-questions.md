@@ -1,5 +1,5 @@
 ---
-title: "Jenkins Scenario-Based Interview Questions and Answers"
+title: "Jenkins Scenario-Based Interview Questions and Answers (2026)"
 description: "20 real-world Jenkins scenario-based interview questions and answers covering architecture, pipelines, shared libraries, agents, security, optimization, Docker/Kubernetes, AWS integrations, and disaster recovery — Senior DevOps Engineer Edition."
 date: 2026-04-16T14:26:30+05:30
 author: "DB"
