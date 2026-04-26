@@ -12,27 +12,6 @@ draft: false
 
 <div class="qa-list">
 
-## 📋 Table of Contents
-
-1. [Branching Strategies](#1-branching-strategies)
-2. [Merge, Rebase & Cherry-Pick](#2-merge-rebase--cherry-pick)
-3. [Undoing Changes & Recovery](#3-undoing-changes--recovery)
-4. [Conflict Resolution](#4-conflict-resolution)
-5. [Git Internals & Architecture](#5-git-internals--architecture)
-6. [Tagging & Releases](#6-tagging--releases)
-7. [Stash, Worktree & Advanced Commands](#7-stash-worktree--advanced-commands)
-8. [Hooks & Automation](#8-hooks--automation)
-9. [Submodules & Subtrees](#9-submodules--subtrees)
-10. [Large Repos & Performance](#10-large-repos--performance)
-11. [GitHub / GitLab Workflows](#11-github--gitlab-workflows)
-12. [Security & Secret Management](#12-security--secret-management)
-13. [Monorepo Strategies](#13-monorepo-strategies)
-14. [Troubleshooting Real Incidents](#14-troubleshooting-real-incidents)
-
----
-
-
-## 1. Branching Strategies
 
 {{< qa num="1" q="Your team of 20 engineers is working on a SaaS product with weekly releases and hotfix needs. Which branching strategy would you recommend and why? Draw the branch flow." level="basic" >}}
 
@@ -183,9 +162,6 @@ git push origin hotfix/payment-crash
 {{< /qa >}}
 
 
-## 2. Merge, Rebase & Cherry-Pick
-
-
 {{< qa num="3" q="A junior developer asks: When should I use *git merge* vs *git rebase* Give a real-world explanation with diagrams." level="advanced" >}}
 
 
@@ -242,8 +218,6 @@ git checkout main
 git merge --no-ff feature/user-auth   # --no-ff preserves merge commit
 git push origin main
 ```
-# Golden Rule: Never rebase commits that exist on origin/shared-branch
-
 {{< /qa >}}
 
 
@@ -332,9 +306,6 @@ git merge --squash feature/big-refactor
 git commit -m "feat: 3-month auth refactor — redesign + OAuth + performance"
 ```
 {{< /qa >}}
-
-
-## 3. Undoing Changes & Recovery
 
 {{< qa num="6" q="A developer ran `git push --force` on the `main` branch and overwrote 3 days of work. How do you recover it?" level="advanced" >}}
 
@@ -502,7 +473,6 @@ git restore --source=HEAD~2 src/payment.java
 ```
 {{< /qa >}}
 
-## 4. Conflict Resolution
 
 {{< qa num="9" q="Two developers edited the same file simultaneously. Walk through resolving a complex merge conflict professionally." level="intermediate" >}}
 
@@ -569,8 +539,6 @@ git config --global merge.conflictstyle diff3
 {{< /qa >}}
 
 
-## 5. Git Internals & Architecture
-
 {{< qa num="10" q="Explain what happens internally when you run `git commit`. Walk through the object model." level="intermediate" >}}
 
 
@@ -623,8 +591,6 @@ echo "test content" | git hash-object --stdin
 # 9daeafb9864cf43055ae93beb0afd6c7d144bfa4
 ```
 {{< /qa >}}
-
-## 6. Tagging & Releases
 
 
 {{< qa num="11" q="How do you implement a professional versioning and tagging strategy with automated release notes?" level="advanced" >}}
@@ -691,8 +657,6 @@ git tag -v v2.3.0                               # Verify signature
 ```
 {{< /qa >}}
 
-
-## 7. Stash, Worktree & Advanced Commands
 
 {{< qa num="12" q="You're in the middle of a feature when an urgent production bug comes in. How do you handle context switching cleanly?" level="intermediate" >}}
 
@@ -809,9 +773,6 @@ git bisect run npm test          # Runs test automatically on each commit
 {{< /qa >}}
 
 
-## 8. Hooks & Automation
-
-
 {{< qa num="14" q="Design a complete Git hooks strategy for enforcing code quality, preventing bad commits, and automating notifications." level="advanced" >}}
 
 
@@ -897,8 +858,6 @@ git config core.hooksPath .githooks/
 {{< /qa >}}
 
 
-## 9. Submodules & Subtrees
-
 {{< qa num="15" q="When would you use git submodules vs git subtrees? Give a production scenario for each." level="advanced" >}}
 
 
@@ -962,8 +921,6 @@ git subtree push --prefix=libs/payment \
 {{< /qa >}}
 
 
-## 10. Large Repos & Performance
-
 {{< qa num="16" q="Your Git repository has grown to 50GB and `git clone` takes 45 minutes. How do you fix this?" level="intermediate" >}}
 
 
@@ -1025,8 +982,6 @@ git repack -a -d --depth=250 --window=250
 ```
 {{< /qa >}}
 
-
-## 11. GitHub / GitLab Workflows
 
 {{< qa num="17" q="A pull request has 47 commits with messages like *WIP*, *fix*, *fix2*, *please work*. How do you clean this up before merging to main?" level="advanced" >}}
 
@@ -1090,8 +1045,6 @@ git push --force-with-lease origin feature/messy-branch
 ```
 {{< /qa >}}
 
-
-## 12. Security & Secret Management
 
 {{< qa num="18" q="How do you audit your entire git history for secrets across 200+ repos in your organization?" level="advanced" >}}
 
@@ -1177,8 +1130,6 @@ git secrets --scan-history
 {{< /qa >}}
 
 
-## 13. Monorepo Strategies
-
 {{< qa num="19" q="Your company is moving 15 microservices from separate repos into a monorepo. How do you do the migration while preserving all git history?" level="advanced" >}}
 
 
@@ -1250,8 +1201,6 @@ git log --oneline services/payment/ | head -10
 ```
 {{< /qa >}}
 
-
-## 14. Troubleshooting Real Incidents
 
 {{< qa num="20" q="During a deployment, git reports Your branch and *origin/main* have diverged. What happened and how do you fix it?" level="advanced" >}}
 

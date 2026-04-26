@@ -1,5 +1,5 @@
 ---
-title: "Git Interview Questions and Answers"
+title: "Git Interview Questions and Answers (2026) Part 01"
 description: "30 real-world Git scenario-based interview questions and answers covering branching strategies, merge/rebase, undoing changes, conflict resolution, Git internals, hooks, submodules, security, monorepos, and troubleshooting — Senior DevOps Engineer Edition."
 date: 2026-04-16T14:26:30+05:30
 author: "DB"
