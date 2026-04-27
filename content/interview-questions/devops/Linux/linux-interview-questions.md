@@ -1,6 +1,6 @@
 ---
-title: "Linux Interview Questions & Answers (2026)"
-description: "50+ Linux interview questions and answers covering processes, file system, permissions, services, and troubleshooting — Basic to Advanced."
+title: "Linux Interview Questions & Answers (2026) Part 01"
+description: "40+ Linux interview questions and answers covering processes, file system, permissions, services, and troubleshooting — Basic to Advanced."
 date: 2025-04-26
 author: "DB"
 tags: ["linux", "interview", "sysadmin", "devops"]
@@ -15,14 +15,14 @@ draft: "false"
 {{< qa num="1" q="Explain the booting process of Linux." level="basic" >}}
 **Ans:**
 
-1. **BIOS/UEFI** — Hardware runs Power-On Self Test (POST). BIOS/UEFI finds the bootable device.
-2. **MBR/GPT** — Master Boot Record (first 512 bytes of disk) or GPT partition table is read. Bootloader location is found.
-3. **GRUB2 (Bootloader)** — GRUB2 loads the Linux kernel (`vmlinuz`) and initial RAM disk (`initrd/initramfs`) into memory.
-4. **Kernel Initialization** — Kernel decompresses itself, initializes hardware drivers, mounts the root filesystem.
-5. **initramfs** — Temporary root filesystem used to load necessary drivers before the real root is mounted.
-6. **systemd (PID 1)** — The first process started by the kernel. It reads unit files and brings up the system.
-7. **Targets** — systemd reaches the configured target (e.g., `multi-user.target` or `graphical.target`), starting all required services.
-8. **Login prompt** — Finally, a TTY login prompt or display manager appears.
+1. **BIOS/UEFI** - Hardware runs Power-On Self Test (POST). BIOS/UEFI finds the bootable device.
+2. **MBR/GPT** - Master Boot Record (first 512 bytes of disk) or GPT partition table is read. Bootloader location is found.
+3. **GRUB2 (Bootloader)** - GRUB2 loads the Linux kernel (`vmlinuz`) and initial RAM disk (`initrd/initramfs`) into memory.
+4. **Kernel Initialization** - Kernel decompresses itself, initializes hardware drivers, mounts the root filesystem.
+5. **initramfs** - Temporary root filesystem used to load necessary drivers before the real root is mounted.
+6. **systemd (PID 1)** - The first process started by the kernel. It reads unit files and brings up the system.
+7. **Targets** - systemd reaches the configured target (e.g., `multi-user.target` or `graphical.target`), starting all required services.
+8. **Login prompt** - Finally, a TTY login prompt or display manager appears.
 
 ```bash
 # View boot messages
@@ -79,11 +79,11 @@ nmap -p 80,443 <server-ip>
 ```
 
 **Flag meanings for ss/netstat:**
-- `-t` — TCP
-- `-u` — UDP
-- `-l` — Listening only
-- `-n` — Numeric (no DNS resolution)
-- `-p` — Show process name/PID
+- `-t` - TCP
+- `-u` - UDP
+- `-l` - Listening only
+- `-n` - Show numeric ports (no DNS resolution)
+- `-p` - Show process name/PID
 {{< /qa >}}
 
 {{< qa num="4" q="Explain the Linux file system structure." level="basic" >}}
@@ -199,10 +199,10 @@ pgrep nginx
 ```
 {{< /qa >}}
 
-{{< qa num="9" q="What is the meaning of 'ps'? Can we get dynamic output from the ps command?" level="basic" >}}
+{{< qa num="9" q="What is the meaning of `ps`? Can we get dynamic output from the ps command?" level="basic" >}}
 **Ans:**
 
-`ps` stands for **Process Status**. It takes a snapshot of currently running processes at that moment — it is **not dynamic**.
+`ps` stands for **Process Status**. It takes a snapshot of currently running processes at that moment. It is **not dynamic**.
 
 For dynamic/real-time output, use:
 
@@ -491,24 +491,24 @@ kill -9  <PID>    # Force
 {{< qa num="22" q="Do you know about htop, iotop, iostat, vmstat?" level="intermediate" >}}
 **Ans:**
 
-**`htop`** — Enhanced `top` with colors, mouse support, easy kill/nice controls
+**`htop`** - Enhanced `top` with colors, mouse support, easy kill/nice controls
 ```bash
 htop
 ```
 
-**`iotop`** — Shows disk I/O usage per process (like top but for disk)
+**`iotop`** - Shows disk I/O usage per process (like top but for disk)
 ```bash
 sudo iotop
 sudo iotop -o    # Only show processes doing I/O
 ```
 
-**`iostat`** — Reports CPU and disk I/O statistics
+**`iostat`** - Reports CPU and disk I/O statistics
 ```bash
 iostat           # One-time snapshot
 iostat -x 2 5   # Extended stats, every 2s, 5 times
 ```
 
-**`vmstat`** — Reports virtual memory, processes, CPU stats
+**`vmstat`** - Reports virtual memory, processes, CPU stats
 ```bash
 vmstat           # One-time
 vmstat 2 5      # Every 2 seconds, 5 iterations
@@ -765,7 +765,7 @@ kill -15 <PID>      # Terminate if rogue process
 ```
 {{< /qa >}}
 
-{{< qa num="34" q="How do you check free space inside a specific folder?" level="basic" >}}
+{{< qa num="34" q="How do you check free space inside a specific folder?" level="intermediate" >}}
 **Ans:**
 
 ```bash
