@@ -1,4 +1,4 @@
 ---
 title: "Git"
-description: "Curated interview questions for Git."
+description: "Git interview Questions and Answers"
 ---
