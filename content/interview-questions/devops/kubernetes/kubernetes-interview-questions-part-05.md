@@ -1,109 +1,23 @@
+---
+title: "Kubernetes Interview Questions & Answers (2026) part 05"
+description: "70+ Kubernetes interview questions and answers from basic to advanced — covering Pods, Deployments, Services, Networking, RBAC, Helm, Autoscaling, Security, and real-world troubleshooting scenarios."
+date: 2025-05-18
+author: "DB"
+tags: ["Kubernetes", "K8s", "Interview", "DevOps", "Containers", "CKA", "CKAD"]
+tool: "kubernetes"
+level: "All Levels"
+question_count: 70
+draft: false
+---
+
 # Kubernetes & EKS Interview Questions & Answers for AWS Cloud and AWS DevOps Engineer
 > A comprehensive guide covering Basic, Intermediate, and Advanced topics for Kubernetes and Amazon EKS interviews.
 
 ---
 
-## 📚 Table of Contents
 
-### 🟢 Basic Questions
+{{< qa num="1" q="What is Kubernetes?" level="basic" >}}
 
-#### Kubernetes Basics
-1. [What is Kubernetes?](#1-what-is-kubernetes)
-2. [What are the main components of the Kubernetes architecture?](#2-what-are-the-main-components-of-the-kubernetes-architecture)
-3. [What is a Pod in Kubernetes?](#3-what-is-a-pod-in-kubernetes)
-4. [What is a Node in Kubernetes?](#4-what-is-a-node-in-kubernetes)
-5. [What is a Namespace in Kubernetes?](#5-what-is-a-namespace-in-kubernetes)
-6. [What is a Deployment in Kubernetes?](#6-what-is-a-deployment-in-kubernetes)
-7. [What is a ReplicaSet?](#7-what-is-a-replicaset)
-8. [What is a Service in Kubernetes?](#8-what-is-a-service-in-kubernetes)
-9. [What are the types of Kubernetes Services?](#9-what-are-the-types-of-kubernetes-services)
-10. [What is a ConfigMap?](#10-what-is-a-configmap)
-11. [What is a Secret in Kubernetes?](#11-what-is-a-secret-in-kubernetes)
-12. [What is kubectl?](#12-what-is-kubectl)
-13. [What is a DaemonSet?](#13-what-is-a-daemonset)
-14. [What is a StatefulSet?](#14-what-is-a-statefulset)
-15. [What is a Job and a CronJob in Kubernetes?](#15-what-is-a-job-and-a-cronjob-in-kubernetes)
-
-#### EKS Basics
-16. [What is Amazon EKS?](#16-what-is-amazon-eks)
-17. [What is the difference between EKS and self-managed Kubernetes?](#17-what-is-the-difference-between-eks-and-self-managed-kubernetes)
-18. [What are EKS Node Groups?](#18-what-are-eks-node-groups)
-19. [What is AWS Fargate in the context of EKS?](#19-what-is-aws-fargate-in-the-context-of-eks)
-20. [How do you authenticate to an EKS cluster?](#20-how-do-you-authenticate-to-an-eks-cluster)
-
----
-
-### 🟡 Intermediate Questions
-
-#### Kubernetes Intermediate
-21. [What is the difference between a Deployment and a StatefulSet?](#21-what-is-the-difference-between-a-deployment-and-a-statefulset)
-22. [What is a PersistentVolume (PV) and PersistentVolumeClaim (PVC)?](#22-what-is-a-persistentvolume-pv-and-persistentvolumeclaim-pvc)
-23. [What is a StorageClass in Kubernetes?](#23-what-is-a-storageclass-in-kubernetes)
-24. [How does Kubernetes handle rolling updates?](#24-how-does-kubernetes-handle-rolling-updates)
-25. [What is a Liveness Probe and Readiness Probe?](#25-what-is-a-liveness-probe-and-readiness-probe)
-26. [What is a Horizontal Pod Autoscaler (HPA)?](#26-what-is-a-horizontal-pod-autoscaler-hpa)
-27. [What is the Kubernetes Scheduler and how does it work?](#27-what-is-the-kubernetes-scheduler-and-how-does-it-work)
-28. [What are Taints and Tolerations?](#28-what-are-taints-and-tolerations)
-29. [What are Node Affinity and Pod Affinity?](#29-what-are-node-affinity-and-pod-affinity)
-30. [What is RBAC in Kubernetes?](#30-what-is-rbac-in-kubernetes)
-31. [What is an Ingress Controller in Kubernetes?](#31-what-is-an-ingress-controller-in-kubernetes)
-32. [What is etcd and what role does it play?](#32-what-is-etcd-and-what-role-does-it-play)
-33. [What is a Kubernetes Operator?](#33-what-is-a-kubernetes-operator)
-34. [What is the difference between a ClusterRole and a Role?](#34-what-is-the-difference-between-a-clusterrole-and-a-role)
-35. [How does Kubernetes DNS work?](#35-how-does-kubernetes-dns-work)
-
-#### EKS Intermediate
-36. [What is the EKS Control Plane and how is it managed?](#36-what-is-the-eks-control-plane-and-how-is-it-managed)
-37. [How does IAM integrate with EKS?](#37-how-does-iam-integrate-with-eks)
-38. [What is the aws-auth ConfigMap?](#38-what-is-the-aws-auth-configmap)
-39. [What is the Amazon VPC CNI plugin?](#39-what-is-the-amazon-vpc-cni-plugin)
-40. [How do you scale nodes in EKS?](#40-how-do-you-scale-nodes-in-eks)
-41. [What is Karpenter in EKS?](#41-what-is-karpenter-in-eks)
-42. [What is EKS Anywhere?](#42-what-is-eks-anywhere)
-43. [How does EKS integrate with AWS Load Balancer Controller?](#43-how-does-eks-integrate-with-aws-load-balancer-controller)
-44. [What are EKS Add-ons?](#44-what-are-eks-add-ons)
-45. [How do you manage secrets in EKS?](#45-how-do-you-manage-secrets-in-eks)
-
----
-
-### 🔴 Advanced Questions
-
-#### Kubernetes Advanced
-46. [How does the Kubernetes networking model work?](#46-how-does-the-kubernetes-networking-model-work)
-47. [What is a Custom Resource Definition (CRD)?](#47-what-is-a-custom-resource-definition-crd)
-48. [What is a Vertical Pod Autoscaler (VPA)?](#48-what-is-a-vertical-pod-autoscaler-vpa)
-49. [What is a Pod Disruption Budget (PDB)?](#49-what-is-a-pod-disruption-budget-pdb)
-50. [How does Kubernetes implement service discovery?](#50-how-does-kubernetes-implement-service-discovery)
-51. [What is a Service Mesh and how does Istio work with Kubernetes?](#51-what-is-a-service-mesh-and-how-does-istio-work-with-kubernetes)
-52. [What is the Kubernetes API server admission controller?](#52-what-is-the-kubernetes-api-server-admission-controller)
-53. [What are Kubernetes Network Policies?](#53-what-are-kubernetes-network-policies)
-54. [How does Kubernetes handle multi-tenancy?](#54-how-does-kubernetes-handle-multi-tenancy)
-55. [What is the difference between kube-proxy modes (iptables vs IPVS)?](#55-what-is-the-difference-between-kube-proxy-modes-iptables-vs-ipvs)
-56. [How does Kubernetes garbage collection work?](#56-how-does-kubernetes-garbage-collection-work)
-57. [What is the Cluster Autoscaler and how does it work?](#57-what-is-the-cluster-autoscaler-and-how-does-it-work)
-58. [What is GitOps and how is it implemented with Kubernetes?](#58-what-is-gitops-and-how-is-it-implemented-with-kubernetes)
-59. [How do you troubleshoot a CrashLoopBackOff error?](#59-how-do-you-troubleshoot-a-crashloopbackoff-error)
-60. [What is OPA Gatekeeper and how is it used in Kubernetes?](#60-what-is-opa-gatekeeper-and-how-is-it-used-in-kubernetes)
-
-#### EKS Advanced
-61. [How does EKS use IRSA (IAM Roles for Service Accounts)?](#61-how-does-eks-use-irsa-iam-roles-for-service-accounts)
-62. [What is EKS Pod Identity and how does it differ from IRSA?](#62-what-is-eks-pod-identity-and-how-does-it-differ-from-irsa)
-63. [How do you implement multi-cluster EKS architectures?](#63-how-do-you-implement-multi-cluster-eks-architectures)
-64. [How do you optimize costs in an EKS environment?](#64-how-do-you-optimize-costs-in-an-eks-environment)
-65. [What is the EKS Distro (EKS-D)?](#65-what-is-the-eks-distro-eks-d)
-66. [How do you implement blue/green deployments in EKS?](#66-how-do-you-implement-bluegreen-deployments-in-eks)
-67. [How does EKS handle etcd backups and disaster recovery?](#67-how-does-eks-handle-etcd-backups-and-disaster-recovery)
-68. [What are EKS security best practices?](#68-what-are-eks-security-best-practices)
-69. [How do you monitor and observe an EKS cluster?](#69-how-do-you-monitor-and-observe-an-eks-cluster)
-70. [How do you upgrade an EKS cluster with zero downtime?](#70-how-do-you-upgrade-an-eks-cluster-with-zero-downtime)
-
----
-
-## 🟢 Basic Questions
-
----
-
-### 1. What is Kubernetes?
 
 **Answer:**
 
@@ -127,9 +41,9 @@ kubectl cluster-info
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 2. What are the main components of the Kubernetes architecture?
+{{< qa num="2" q="What are the main components of the Kubernetes architecture?" level="basic" >}}
 
 **Answer:**
 
@@ -177,11 +91,9 @@ Kubernetes follows a master-worker architecture:
 └──────────────────────┘
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 3. What is a Pod in Kubernetes?
+{{< qa num="3" q="What is a Pod in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -227,11 +139,9 @@ kubectl describe pod my-app-pod
 kubectl logs my-app-pod
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 4. What is a Node in Kubernetes?
+{{< qa num="4" q="What is a Node in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -257,11 +167,10 @@ kubectl describe node <node-name>
 kubectl top nodes
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 5. What is a Namespace in Kubernetes?
+{{< qa num="5" q="What is a Namespace in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -303,11 +212,10 @@ spec:
     limits.memory: 16Gi
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 6. What is a Deployment in Kubernetes?
+{{< qa num="6" q="What is a Deployment in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -362,9 +270,9 @@ kubectl rollout history deployment/my-app
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 7. What is a ReplicaSet?
+{{< qa num="7" q="What is a ReplicaSet?" level="basic" >}}
 
 **Answer:**
 
@@ -395,11 +303,9 @@ spec:
         image: nginx
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 8. What is a Service in Kubernetes?
+{{< qa num="8" q="What is a Service in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -427,9 +333,9 @@ spec:
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 9. What are the types of Kubernetes Services?
+{{< qa num="9" q="What are the types of Kubernetes Services?" level="basic" >}}
 
 **Answer:**
 
@@ -459,9 +365,9 @@ spec:
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 10. What is a ConfigMap?
+{{< qa num="9" q="What are the types of Kubernetes Services?" level="basic" >}}
 
 **Answer:**
 
@@ -501,11 +407,9 @@ spec:
       name: app-config
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 11. What is a Secret in Kubernetes?
+{{< qa num="11" q="What is a Secret in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -548,11 +452,9 @@ spec:
           key: password
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 12. What is kubectl?
+{{< qa num="12" q="What is kubectl?" level="basic" >}}
 
 **Answer:**
 
@@ -588,9 +490,9 @@ kubectl top nodes
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 13. What is a DaemonSet?
+{{< qa num="13" q="What is a DaemonSet?" level="basic" >}}
 
 **Answer:**
 
@@ -626,11 +528,9 @@ spec:
         - containerPort: 9100
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 14. What is a StatefulSet?
+{{< qa num="14" q="What is a StatefulSet?" level="basic" >}}
 
 **Answer:**
 
@@ -675,11 +575,9 @@ spec:
 
 Pods are named with ordinal suffixes: `postgres-0`, `postgres-1`, `postgres-2`.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 15. What is a Job and a CronJob in Kubernetes?
+{{< qa num="15" q="What is a Job and a CronJob in Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -722,11 +620,9 @@ spec:
             command: ["./backup.sh"]
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 16. What is Amazon EKS?
+{{< qa num="16" q="What is Amazon EKS?" level="basic" >}}
 
 **Answer:**
 
@@ -755,11 +651,9 @@ eksctl create cluster \
 aws eks update-kubeconfig --name my-cluster --region us-east-1
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 17. What is the difference between EKS and self-managed Kubernetes?
+{{< qa num="17" q="What is the difference between EKS and self-managed Kubernetes?" level="basic" >}}
 
 **Answer:**
 
@@ -773,11 +667,9 @@ aws eks update-kubeconfig --name my-cluster --region us-east-1
 | **AWS Integration** | Native (IAM, VPC, ALB) | Manual configuration |
 | **Flexibility** | Less control over control plane | Full control |
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 18. What are EKS Node Groups?
+{{< qa num="18" q="What are EKS Node Groups?" level="basic" >}}
 
 **Answer:**
 
@@ -807,11 +699,9 @@ eksctl create nodegroup \
 eksctl get nodegroup --cluster my-cluster
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 19. What is AWS Fargate in the context of EKS?
+{{< qa num="19" q="What is AWS Fargate in the context of EKS?" level="basic" >}}
 
 **Answer:**
 
@@ -845,11 +735,9 @@ eksctl create fargateprofile \
   --namespace my-namespace
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 20. How do you authenticate to an EKS cluster?
+{{< qa num="20" q="How do you authenticate to an EKS cluster?" level="basic" >}}
 
 **Answer:**
 
@@ -877,13 +765,9 @@ kubectl config view
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-## 🟡 Intermediate Questions
-
----
-
-### 21. What is the difference between a Deployment and a StatefulSet?
+{{< qa num="21" q="What is the difference between a Deployment and a StatefulSet?" level="intermediate" >}}
 
 **Answer:**
 
@@ -902,11 +786,9 @@ kubectl config view
 # Example: postgres-0.postgres.default.svc.cluster.local
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 22. What is a PersistentVolume (PV) and PersistentVolumeClaim (PVC)?
+{{< qa num="22" q="What is a PersistentVolume (PV) and PersistentVolumeClaim (PVC)?" level="intermediate" >}}
 
 **Answer:**
 
@@ -947,12 +829,9 @@ spec:
     persistentVolumeClaim:
       claimName: my-pvc
 ```
+{{< /qa >}}
 
-[🔝 Back to Table of Contents](#-table-of-contents)
-
----
-
-### 23. What is a StorageClass in Kubernetes?
+{{< qa num="23" q="What is a StorageClass in Kubernetes?" level="intermediate" >}}
 
 **Answer:**
 
@@ -979,11 +858,10 @@ volumeBindingMode: WaitForFirstConsumer
 - `Delete` — automatically delete PV when PVC is deleted
 - `Retain` — keep PV after PVC deletion for manual reclamation
 
-[🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 24. How does Kubernetes handle rolling updates?
+{{< qa num="24" q="How does Kubernetes handle rolling updates?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1022,9 +900,9 @@ kubectl rollout resume deployment/my-app
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 25. What is a Liveness Probe and Readiness Probe?
+{{< qa num="25" q="What is a Liveness Probe and Readiness Probe?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1062,11 +940,9 @@ spec:
 
 **Probe types:** `httpGet`, `tcpSocket`, `exec` (command)
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 26. What is a Horizontal Pod Autoscaler (HPA)?
+{{< qa num="26" q="What is a Horizontal Pod Autoscaler (HPA)?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1109,11 +985,9 @@ kubectl get hpa
 
 **Note:** HPA requires the `metrics-server` to be installed in the cluster.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 27. What is the Kubernetes Scheduler and how does it work?
+{{< qa num="27" q="What is the Kubernetes Scheduler and how does it work?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1145,9 +1019,9 @@ spec:
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 28. What are Taints and Tolerations?
+{{< qa num="28" q="What are Taints and Tolerations?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1182,9 +1056,9 @@ spec:
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 29. What are Node Affinity and Pod Affinity?
+{{< qa num="29" q="What are Node Affinity and Pod Affinity?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1223,11 +1097,9 @@ spec:
         topologyKey: kubernetes.io/hostname
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 30. What is RBAC in Kubernetes?
+{{< qa num="30" q="What is RBAC in Kubernetes?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1271,11 +1143,9 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 31. What is an Ingress Controller in Kubernetes?
+{{< qa num="31" q="What is an Ingress Controller in Kubernetes?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1316,11 +1186,9 @@ spec:
 
 **In EKS**, the AWS Load Balancer Controller creates ALBs automatically from Ingress resources using annotations.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 32. What is etcd and what role does it play?
+{{< qa num="32" q="What is etcd and what role does it play?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1345,11 +1213,9 @@ ETCDCTL_API=3 etcdctl snapshot save snapshot.db \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 33. What is a Kubernetes Operator?
+{{< qa num="33" q="What is a Kubernetes Operator?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1383,11 +1249,9 @@ spec:
             storage: 50Gi
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 34. What is the difference between a ClusterRole and a Role?
+{{< qa num="34" q="What is the difference between a ClusterRole and a Role?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1405,9 +1269,9 @@ This is useful when you want to reuse a ClusterRole definition across multiple n
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 35. How does Kubernetes DNS work?
+{{< qa num="35" q="How does Kubernetes DNS work?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1435,9 +1299,9 @@ kubectl exec -it my-pod -- curl http://my-service.my-namespace.svc.cluster.local
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 36. What is the EKS Control Plane and how is it managed?
+{{< qa num="36" q="What is the EKS Control Plane and how is it managed?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1463,9 +1327,9 @@ aws eks list-clusters --region us-east-1
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 37. How does IAM integrate with EKS?
+{{< qa num="37" q="How does IAM integrate with EKS?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1488,9 +1352,9 @@ aws sts get-caller-identity
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 38. What is the aws-auth ConfigMap?
+{{< qa num="38" q="What is the aws-auth ConfigMap?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1524,9 +1388,9 @@ data:
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 39. What is the Amazon VPC CNI plugin?
+{{< qa num="39" q="What is the Amazon VPC CNI plugin?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1552,9 +1416,9 @@ Each EC2 instance type has a limit on ENIs and IPs per ENI. Max Pods = `(ENIs ×
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 40. How do you scale nodes in EKS?
+{{< qa num="40" q="How do you scale nodes in EKS?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1591,11 +1455,9 @@ spec:
         - --skip-nodes-with-system-pods=false
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 41. What is Karpenter in EKS?
+{{< qa num="41" q="What is Karpenter in EKS?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1632,11 +1494,9 @@ spec:
     cpu: 1000
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 42. What is EKS Anywhere?
+{{< qa num="42" q="What is EKS Anywhere?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1653,11 +1513,11 @@ spec:
 - Supports curated packages (CoreDNS, Cilium, etc.)
 - Optionally connect to AWS via EKS Connector for management in the AWS Console
 
-[🔝 Back to Table of Contents](#-table-of-contents)
 
----
 
-### 43. How does EKS integrate with AWS Load Balancer Controller?
+{{< /qa >}}
+
+{{< qa num="43" q="How does EKS integrate with AWS Load Balancer Controller?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1702,9 +1562,9 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 44. What are EKS Add-ons?
+{{< qa num="44" q="What are EKS Add-ons?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1736,9 +1596,9 @@ aws eks list-addons --cluster-name my-cluster
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 45. How do you manage secrets in EKS?
+{{< qa num="45" q="How do you manage secrets in EKS?" level="intermediate" >}}
 
 **Answer:**
 
@@ -1789,13 +1649,9 @@ aws eks create-cluster \
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-## 🔴 Advanced Questions
-
----
-
-### 46. How does the Kubernetes networking model work?
+{{< qa num="46" q="How does the Kubernetes networking model work?" level="advanced" >}}
 
 **Answer:**
 
@@ -1824,9 +1680,9 @@ kubectl exec -it my-pod -- traceroute 10.100.0.1
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 47. What is a Custom Resource Definition (CRD)?
+{{< qa num="47" q="What is a Custom Resource Definition (CRD)?" level="advanced" >}}
 
 **Answer:**
 
@@ -1875,11 +1731,10 @@ spec:
   replicas: 3
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 48. What is a Vertical Pod Autoscaler (VPA)?
+{{< qa num="48" q="What is a Vertical Pod Autoscaler (VPA)?" level="advanced" >}}
 
 **Answer:**
 
@@ -1915,11 +1770,9 @@ spec:
 
 > **Note:** VPA and HPA should not be used together on the same metric (e.g., both on CPU). HPA + VPA on different metrics (e.g., HPA on custom metrics, VPA on CPU/memory) can work together.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 49. What is a Pod Disruption Budget (PDB)?
+{{< qa num="49" q="What is a Pod Disruption Budget (PDB)?" level="advanced" >}}
 
 **Answer:**
 
@@ -1951,11 +1804,9 @@ kubectl get pdb
 kubectl drain node1 --ignore-daemonsets --delete-emptydir-data
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 50. How does Kubernetes implement service discovery?
+{{< qa num="50" q="How does Kubernetes implement service discovery?" level="advanced" >}}
 
 **Answer:**
 
@@ -1989,11 +1840,9 @@ spec:
   - port: 5432
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 51. What is a Service Mesh and how does Istio work with Kubernetes?
+{{< qa num="51" q="What is a Service Mesh and how does Istio work with Kubernetes?" level="advanced">}}
 
 **Answer:**
 
@@ -2031,11 +1880,9 @@ spec:
       weight: 10
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 52. What is the Kubernetes API server admission controller?
+{{< qa num="52" q="What is the Kubernetes API server admission controller?" level="advanced" >}}
 
 **Answer:**
 
@@ -2073,11 +1920,9 @@ webhooks:
   sideEffects: None
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 53. What are Kubernetes Network Policies?
+{{< qa num="53" q="What are Kubernetes Network Policies?" level="advanced" >}}
 
 **Answer:**
 
@@ -2116,11 +1961,9 @@ spec:
 
 > **Default behavior:** Without a NetworkPolicy, all traffic is allowed. Once a NetworkPolicy selects a Pod, that Pod follows the policy's rules.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 54. How does Kubernetes handle multi-tenancy?
+{{< qa num="54" q="How does Kubernetes handle multi-tenancy?" level="advanced" >}}
 
 **Answer:**
 
@@ -2156,11 +1999,9 @@ spec:
     services: "10"
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 55. What is the difference between kube-proxy modes (iptables vs IPVS)?
+{{< qa num="55" q="What is the difference between kube-proxy modes (iptables vs IPVS)?" level="advanced" >}}
 
 **Answer:**
 
@@ -2185,11 +2026,9 @@ kubectl edit configmap kube-proxy -n kube-system
 
 For large clusters (>1000 Services), **IPVS** mode is strongly recommended. EKS also supports IPVS mode.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 56. How does Kubernetes garbage collection work?
+{{< qa num="56" q="How does Kubernetes garbage collection work?" level="advanced" >}}rk?
 
 **Answer:**
 
@@ -2222,11 +2061,9 @@ spec:
   ttlSecondsAfterFinished: 60
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 57. What is the Cluster Autoscaler and how does it work?
+{{< qa num="57" q="What is the Cluster Autoscaler and how does it work?" level="advanced" >}}
 
 **Answer:**
 
@@ -2256,12 +2093,9 @@ Tags:
 --scale-down-unneeded-time=10m         # Node must be unneeded for this long
 --skip-nodes-with-local-storage=false  # Allow scale-down of nodes with local storage
 ```
+{{< /qa >}}
 
-[🔝 Back to Table of Contents](#-table-of-contents)
-
----
-
-### 58. What is GitOps and how is it implemented with Kubernetes?
+{{< qa num="58" q="What is GitOps and how is it implemented with Kubernetes?" level="advanced" >}}
 
 **Answer:**
 
@@ -2299,11 +2133,9 @@ spec:
       selfHeal: true
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 59. How do you troubleshoot a CrashLoopBackOff error?
+{{< qa num="59" q="How do you troubleshoot a CrashLoopBackOff error?" level="advanced" >}}
 
 **Answer:**
 
@@ -2348,9 +2180,9 @@ kubectl debug -it <pod-name> --image=busybox --target=<container-name>
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 60. What is OPA Gatekeeper and how is it used in Kubernetes?
+{{< qa num="60" q="What is OPA Gatekeeper and how is it used in Kubernetes?" level="advanced" >}}
 
 **Answer:**
 
@@ -2406,11 +2238,9 @@ spec:
     labels: ["env", "team", "app"]
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 61. How does EKS use IRSA (IAM Roles for Service Accounts)?
+{{< qa num="61" q="How does EKS use IRSA (IAM Roles for Service Accounts)?" level="advanced" >}}
 
 **Answer:**
 
@@ -2449,11 +2279,9 @@ metadata:
     eks.amazonaws.com/role-arn: arn:aws:iam::123456789:role/my-pod-role
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 62. What is EKS Pod Identity and how does it differ from IRSA?
+{{< qa num="62" q="What is EKS Pod Identity and how does it differ from IRSA?" level="advanced" >}}
 
 **Answer:**
 
@@ -2485,9 +2313,9 @@ aws eks create-pod-identity-association \
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 63. How do you implement multi-cluster EKS architectures?
+{{< qa num="63" q="How do you implement multi-cluster EKS architectures?" level="advanced" >}}
 
 **Answer:**
 
@@ -2520,11 +2348,9 @@ Multi-cluster architectures improve availability, separate concerns, and meet co
 argocd cluster add --kubeconfig ./cluster2-kubeconfig arn:aws:eks:us-west-2:123456789:cluster/cluster2
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 64. How do you optimize costs in an EKS environment?
+{{< qa num="64" q="How do you optimize costs in an EKS environment?" level="advanced" >}}
 
 **Answer:**
 
@@ -2571,11 +2397,9 @@ helm install kubecost cost-analyzer \
   --namespace kubecost --create-namespace
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 65. What is the EKS Distro (EKS-D)?
+{{< qa num="65" q="What is the EKS Distro (EKS-D)?" level="advanced" >}}
 
 **Answer:**
 
@@ -2591,11 +2415,9 @@ helm install kubecost cost-analyzer \
 - Consistent behavior across hybrid environments
 - Foundation for EKS Anywhere
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 66. How do you implement blue/green deployments in EKS?
+{{< qa num="66" q="How do you implement blue/green deployments in EKS?" level="advanced" >}}
 
 **Answer:**
 
@@ -2642,11 +2464,9 @@ spec:
       autoPromotionEnabled: false
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 67. How does EKS handle etcd backups and disaster recovery?
+{{< qa num="67" q="How does EKS handle etcd backups and disaster recovery?" level="advanced" >}}
 
 **Answer:**
 
@@ -2680,11 +2500,9 @@ velero schedule create daily-backup \
 velero restore create --from-backup my-backup
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 68. What are EKS security best practices?
+{{< qa num="68" q="What are EKS security best practices?" level="advanced" >}}
 
 **Answer:**
 
@@ -2731,11 +2549,9 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
----
-
-### 69. How do you monitor and observe an EKS cluster?
+{{< qa num="69" q="How do you monitor and observe an EKS cluster?" level="advanced" >}}
 
 **Answer:**
 
@@ -2779,9 +2595,9 @@ aws eks create-addon \
 
 [🔝 Back to Table of Contents](#-table-of-contents)
 
----
+{{< /qa >}}
 
-### 70. How do you upgrade an EKS cluster with zero downtime?
+{{< qa num="70" q="How do you upgrade an EKS cluster with zero downtime?" level="advanced" >}}
 
 **Answer:**
 
@@ -2842,7 +2658,7 @@ kubectl get events -A | grep Warning
 
 > **Key tip:** Upgrade one minor version at a time (e.g., 1.27 → 1.28 → 1.29). Skipping versions is not supported.
 
-[🔝 Back to Table of Contents](#-table-of-contents)
+{{< /qa >}}
 
 ---
 

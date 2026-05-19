@@ -1,39 +1,20 @@
-# ☸️ Kubernetes — Complete Scenario-Based Interview Guide
+---
+title: "Kubernetes Interview Questions & Answers (2026) part 04"
+description: "50+ Kubernetes interview questions and answers from basic to advanced — covering Pods, Deployments, Services, Networking, RBAC, Helm, Autoscaling, Security, and real-world troubleshooting scenarios."
+date: 2025-05-18
+author: "DB"
+tags: ["Kubernetes", "K8s", "Interview", "DevOps", "Containers", "CKA", "CKAD"]
+tool: "kubernetes"
+level: "All Levels"
+question_count: 30
+draft: false
+---
 
 > **80+ scenario-based questions · Real-world answers · Production patterns · YAML manifests**
 
 ---
 
-## Kubernetes Interview List
-
-1. Explain Kubernetes architecture to a new team member
-
----
-
-
-## 📋 Table of Contents
-
-| # | Category | Questions |
-|---|----------|-----------|
-| 1 | [🟢 Core Concepts & Architecture](#-core-concepts--architecture) | Q1 – Q8 |
-| 2 | [🔵 Pods & Workloads](#-pods--workloads) | Q9 – Q18 |
-| 3 | [🟣 Services & Networking](#-services--networking) | Q19 – Q26 |
-| 4 | [🟠 Storage & Volumes](#-storage--volumes) | Q27 – Q32 |
-| 5 | [🔴 Configuration & Secrets](#-configuration--secrets) | Q33 – Q38 |
-| 6 | [🟡 Scheduling & Resource Management](#-scheduling--resource-management) | Q39 – Q45 |
-| 7 | [🩵 Security & RBAC](#-security--rbac) | Q46 – Q52 |
-| 8 | [🩶 Observability & Troubleshooting](#-observability--troubleshooting) | Q53 – Q60 |
-| 9 | [🟤 CI/CD & GitOps](#-cicd--gitops) | Q61 – Q67 |
-| 10 | [⚡ Advanced & Production Patterns](#-advanced--production-patterns) | Q68 – Q80 |
-| 11 | [📋 Quick Reference Cheatsheet](#-quick-reference-cheatsheet) | — |
-
----
-
-## 🟢 Core Concepts & Architecture
-
----
-
-### Q1 — Explain Kubernetes architecture to a new team member
+{{< qa num="1" q="Explain Kubernetes architecture to a new team member" level="advanced" >}}
 
 > 🎯 **Scenario:** A developer joining your team asks: *"What is Kubernetes and how does it actually work under the hood?"*
 
@@ -77,9 +58,9 @@ Kubernetes is an open-source container orchestration platform that automates dep
 
 > 💡 **Key insight:** The API server is the **only** component that reads/writes to etcd. All others communicate exclusively through the API server. This makes the API server the single source of authority.
 
----
+{{< /qa >}}
 
-### Q2 — What happens step-by-step when you run `kubectl apply -f deployment.yaml`?
+{{< qa num="2" q="What happens step-by-step when you run kubectl apply -f deployment.yaml?" level="advanced" >}}
 
 > 🎯 **Scenario:** An interviewer asks you to walk through the complete internal flow when applying a manifest.
 
@@ -125,9 +106,10 @@ Step 7: kube-proxy
 
 > ✅ **Admission controllers run BEFORE etcd persistence** — this is where OPA/Gatekeeper, PodSecurity, LimitRanger, and ResourceQuota are enforced. If any validating webhook rejects the object, it never reaches etcd.
 
----
+{{< /qa >}}
 
-### Q3 — Difference between Pod, ReplicaSet, Deployment, and StatefulSet
+
+{{< qa num="3" q="Difference between Pod, ReplicaSet, Deployment, and StatefulSet" level="advanced" >}}
 
 > 🎯 **Scenario:** Your colleague is confused about which workload type to use. Explain with examples.
 
@@ -216,9 +198,10 @@ spec:
 
 > 💡 **StatefulSet key properties:** Pods get stable DNS names (`postgres-0`, `postgres-1`, `postgres-2`), ordered startup (0 → 1 → 2), ordered shutdown (2 → 1 → 0), and each gets its own PersistentVolumeClaim.
 
----
+{{< /qa >}}
 
-### Q4 — What is a Namespace and how do you isolate multiple teams?
+
+{{< qa num="4" q="What is a Namespace and how do you isolate multiple teams?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your company is onboarding 5 teams onto a shared Kubernetes cluster. How do you isolate them properly?
 
@@ -292,9 +275,10 @@ curl http://db-service.team-alpha-prod.svc.cluster.local:5432
 
 > ✅ **Best practice:** Use `<team>-<environment>` naming (e.g., `alpha-prod`, `alpha-staging`, `alpha-dev`). Never use the `default` namespace for production workloads.
 
----
+{{< /qa >}}
 
-### Q5 — Explain etcd and what happens if it goes down
+
+{{< qa num="5" q="Explain etcd and what happens if it goes down" level="advanced" >}}
 
 > 🎯 **Scenario:** One node of your production etcd cluster fails. What is the impact and how do you recover?
 
@@ -346,9 +330,9 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20240101.db \
 
 > ⚠️ **Production requirement:** Always run etcd with **3 or 5 nodes** (odd number for quorum). Automate etcd snapshots to S3 every 30 minutes. Test restores regularly.
 
----
+{{< /qa >}}
 
-### Q6 — How does Kubernetes self-heal after a node failure?
+{{< qa num="6" q="How does Kubernetes self-heal after a node failure?" level="advanced" >}}
 
 > 🎯 **Scenario:** A worker node in your cluster suddenly becomes unreachable. Walk through what Kubernetes does automatically.
 
@@ -396,10 +380,10 @@ kubectl describe node node-1 | grep -A 20 "Conditions:"
 
 > 💡 **PodDisruptionBudgets** prevent Kubernetes from evicting too many pods at once during voluntary disruptions (node drains, cluster upgrades). Always define PDBs for production workloads with replicas > 1.
 
----
 
-### Q7 — What is the difference between kubectl apply, create, replace, and patch?
+{{< /qa >}}
 
+{{< qa num="7" q="What is the difference between kubectl apply, create, replace, and patch?" level="advanced" >}}
 > 🎯 **Scenario:** A junior engineer asks when to use which command. Explain with examples.
 
 **Answer:**
@@ -443,9 +427,9 @@ kubectl diff -f deployment.yaml
 
 > ✅ **Always use `kubectl apply`** in production pipelines. It is declarative, idempotent, and enables accurate drift detection via the `kubectl.kubernetes.io/last-applied-configuration` annotation.
 
----
+{{< /qa >}}
 
-### Q8 — How do labels and selectors work, and why are they important?
+{{< qa num="8" q="How do labels and selectors work, and why are they important?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your Service is not routing traffic to pods. The pods are running but endpoints are empty. What's happening?
 
@@ -516,9 +500,9 @@ kubectl label pod web-app-xxxx version-             # Remove a label
 
 ## 🔵 Pods & Workloads
 
----
+{{< /qa >}}
 
-### Q9 — Your pod keeps crashing with CrashLoopBackOff. How do you debug it?
+{{< qa num="9" q="Your pod keeps crashing with CrashLoopBackOff. How do you debug it?" level="advanced" >}}
 
 > 🎯 **Scenario:** You deployed a new application and pods show `CrashLoopBackOff`. Production is down. What is your step-by-step debugging process?
 
@@ -569,9 +553,9 @@ kubectl get events -n production --sort-by='.lastTimestamp' | tail -20
 | 126 | Command not executable | Fix file permissions |
 | 127 | Command not found | Fix `command`/`args`, check image |
 
----
+{{< /qa >}}
 
-### Q10 — How do you perform a zero-downtime rolling update?
+{{< qa num="10" q="How do you perform a zero-downtime rolling update?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need to update a production web app from v1.0 to v2.0 with zero service interruption and immediate rollback capability.
 
@@ -650,9 +634,9 @@ kubectl rollout resume deployment/web-app -n production
 
 > ✅ **Without a readiness probe**, Kubernetes has no way to know if a new pod is actually serving traffic. New pods will receive traffic immediately upon startup — before they're ready — causing errors.
 
----
+{{< /qa >}}
 
-### Q11 — What are Init Containers and when do you use them?
+{{< qa num="11" q="What are Init Containers and when do you use them?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your app container needs the database to be up and a config file generated before it starts. How do you handle this reliably?
 
@@ -723,9 +707,9 @@ spec:
 
 > 💡 **Init containers can have different images** from the main container — useful for running tools (aws-cli, curl, migrate) that you don't want in your production image. They share the same network and volumes as the main container.
 
----
+{{< /qa >}}
 
-### Q12 — How do you configure liveness, readiness, and startup probes correctly?
+{{< qa num="12" q="How do you configure liveness, readiness, and startup probes correctly?" level="advanced" >}}
 
 > 🎯 **Scenario:** Pods are getting killed unnecessarily during slow startup, and traffic is being sent to pods that aren't ready yet.
 
@@ -792,9 +776,9 @@ spec:
 
 > ⚠️ **Common mistake:** Setting `livenessProbe` without a `startupProbe` on slow-starting apps. The liveness probe fires too soon, kills the app before it finishes starting, and you get a crash loop. Always use `startupProbe` for apps that take more than 30 seconds to start.
 
----
+{{< /qa >}}
 
-### Q13 — How do you implement a Canary deployment without a service mesh?
+{{< qa num="13" q="How do you implement a Canary deployment without a service mesh?" level="advanced" >}}
 
 > 🎯 **Scenario:** You want to route 10% of production traffic to v2.0 to validate it, then gradually increase to 100%.
 
@@ -881,9 +865,9 @@ kubectl delete deployment/web-app-canary
 
 > 💡 **For header/cookie-based traffic splitting**, use NGINX Ingress canary annotations or a service mesh (Istio, Linkerd). The replica-ratio approach splits randomly which is fine for simple cases.
 
----
+{{< /qa >}}
 
-### Q14 — How do DaemonSets work and what are common use cases?
+{{< qa num="14" q="How do DaemonSets work and what are common use cases?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your ops team needs a Datadog agent and a log collector running on every node, including new nodes that join automatically.
 
@@ -965,9 +949,9 @@ spec:
 
 > 💡 **DaemonSet common use cases:** Log collectors (Fluentd, Promtail), metrics agents (Datadog, node-exporter), network plugins (CNI), storage daemons (Ceph), security scanners, GPU device plugins.
 
----
+{{< /qa >}}
 
-### Q15 — How do you run batch Jobs and CronJobs with retry and parallelism?
+{{< qa num="15" q="How do you run batch Jobs and CronJobs with retry and parallelism?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need to run a data processing job that processes 1000 items in parallel chunks, retrying on failure, and a nightly cleanup job.
 
@@ -1049,9 +1033,10 @@ kubectl describe job data-processor -n production
 kubectl logs -l job-name=data-processor --prefix=true
 ```
 
----
+{{< /qa >}}
 
-### Q16 — How do you use sidecar containers and what are common patterns?
+
+{{< qa num="16" q="How do you use sidecar containers and what are common patterns?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need to add request logging, TLS termination, and secrets injection to your app without modifying the application code.
 
@@ -1131,9 +1116,9 @@ spec:
 
 > 💡 **Istio service mesh** uses this pattern at scale — automatically injecting an Envoy proxy sidecar into every pod for mTLS, traffic management, and observability without changing application code.
 
----
+{{< /qa >}}
 
-### Q17 — How do you handle graceful shutdown of pods in Kubernetes?
+{{< qa num="17" q="How do you handle graceful shutdown of pods in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your pods are being killed abruptly during deployments, causing dropped HTTP connections and failed requests.
 
@@ -1199,9 +1184,9 @@ signal.signal(signal.SIGTERM, handle_sigterm)
 
 > ⚠️ **Without preStop sleep**, new traffic can still arrive at the pod for 1-2 seconds after endpoint removal starts (due to iptables propagation lag). The preStop sleep ensures the pod stays alive long enough to drain.
 
----
+{{< /qa >}}
 
-### Q18 — How do you manage multi-container pods with shared state?
+{{< qa num="18" q="How do you manage multi-container pods with shared state?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have a web server and a metrics exporter that need to share a socket file and log directory.
 
@@ -1264,13 +1249,11 @@ spec:
 
 > 💡 **Key multi-container rules:** All containers in a pod share the same network namespace (same IP, same localhost), same IPC namespace, and can share volumes. But they have separate filesystem namespaces (different PID 1s).
 
----
 
-## 🟣 Services & Networking
 
----
+{{< /qa >}}
 
-### Q19 — Explain the different Service types and when to use each
+{{< qa num="19" q="Explain the different Service types and when to use each" level="advanced" >}}
 
 > 🎯 **Scenario:** A developer asks when to use ClusterIP vs NodePort vs LoadBalancer.
 
@@ -1353,9 +1336,9 @@ spec:
 | `Headless` | Direct pod DNS | StatefulSets, Cassandra, Kafka |
 | `ExternalName` | DNS alias | Route to external service by name |
 
----
+{{< /qa >}}
 
-### Q20 — How does Ingress work and how do you configure HTTPS with cert-manager?
+{{< qa num="20" q="How does Ingress work and how do you configure HTTPS with cert-manager?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have 5 microservices and want them at `api.example.com/users`, `api.example.com/orders`, etc. with auto-renewed HTTPS certificates.
 
@@ -1447,9 +1430,9 @@ kubectl describe certificate api-example-com-tls -n production
 kubectl get certificaterequest -n production
 ```
 
----
+{{< /qa >}}
 
-### Q21 — How does Kubernetes DNS work and how do you debug DNS failures?
+{{< qa num="21" q="How does Kubernetes DNS work and how do you debug DNS failures?" level="advanced" >}}
 
 > 🎯 **Scenario:** Pods in your cluster can't resolve service names. Requests fail with "connection refused" or DNS lookup failures.
 
@@ -1512,9 +1495,9 @@ spec:
     - 8.8.8.8       # Additional custom nameservers
 ```
 
----
+{{< /qa >}}
 
-### Q22 — How do you implement zero-trust networking with NetworkPolicies?
+{{< qa num="22" q="How do you implement zero-trust networking with NetworkPolicies?" level="advanced" >}}
 
 > 🎯 **Scenario:** Security audit requires that only frontend can reach the API, only API can reach the database, and nothing else.
 
@@ -1631,9 +1614,9 @@ spec:
 
 > ⚠️ **NetworkPolicies require a CNI plugin that supports them** — Calico, Cilium, or Weave Net. The default `flannel` CNI does **not** enforce NetworkPolicies. Policies are additive: multiple policies combine with OR logic.
 
----
+{{< /qa >}}
 
-### Q23 — How do you expose a service to multiple clusters or use ExternalName?
+{{< qa num="23" q="How do you expose a service to multiple clusters or use ExternalName?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your app in Kubernetes needs to call an RDS database and a third-party payment API by logical names, not hardcoded endpoints.
 
@@ -1695,10 +1678,9 @@ spec:
   resolution: DNS
   location: MESH_EXTERNAL
 ```
+{{< /qa >}}
 
----
-
-### Q24 — How does kube-proxy work and what modes does it support?
+{{< qa num="24" q="How does kube-proxy work and what modes does it support?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your cluster has high traffic and you suspect kube-proxy iptables rules are becoming a performance bottleneck. What are your options?
 
@@ -1738,9 +1720,9 @@ helm install cilium cilium/cilium \
 
 > 💡 **For clusters with > 500 services**, switch to IPVS mode or use Cilium's eBPF kube-proxy replacement. iptables rule evaluation is O(n) — performance degrades linearly with service count.
 
----
+{{< /qa >}}
 
-### Q25 — How do you implement mutual TLS (mTLS) between services?
+{{< qa num="25" q="How do you implement mutual TLS (mTLS) between services?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your compliance team requires all service-to-service communication to be encrypted and mutually authenticated.
 
@@ -1804,9 +1786,9 @@ istioctl authn tls-check api-server-pod-xxx.production
 istioctl proxy-config secret api-server-pod-xxx.production
 ```
 
----
+{{< /qa >}}
 
-### Q26 — How do you configure Service topology and traffic routing policies?
+{{< qa num="26" q="How do you configure Service topology and traffic routing policies?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have a multi-region cluster and want traffic to prefer pods in the same zone to reduce latency and egress costs.
 
@@ -1860,12 +1842,9 @@ spec:
       baseEjectionTime: 30s
 ```
 
+{{< /qa >}}
 
-## 🟠 Storage & Volumes
-
----
-
-### Q27 — Explain PVs, PVCs, and StorageClasses with dynamic provisioning
+{{< qa num="27" q="Explain PVs, PVCs, and StorageClasses with dynamic provisioning" level="advanced" >}}
 
 > 🎯 **Scenario:** A developer needs persistent storage for their PostgreSQL pod that survives pod restarts and node failures.
 
@@ -1946,9 +1925,9 @@ kubectl get pv,pvc -n production
 # PV:  Available → Bound → Released → Reclaimed/Retained
 ```
 
----
+{{< /qa >}}
 
-### Q28 — How do you expand a PVC without downtime?
+{{< qa num="28" q="How do you expand a PVC without downtime?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your PostgreSQL PVC is 80% full and you need to expand from 100Gi to 200Gi without stopping the database.
 
@@ -1983,9 +1962,9 @@ kubectl delete pod postgres-0 -n production
 
 > ⚠️ **Volume expansion is one-directional** — you can only increase, never decrease PVC size. The underlying cloud volume may charge for the new size immediately.
 
----
+{{< /qa >}}
 
-### Q29 — How do you back up and restore stateful workloads?
+{{< qa num="29" q="How do you back up and restore stateful workloads?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need a robust backup strategy for databases running in your cluster.
 
@@ -2065,9 +2044,9 @@ velero restore create \
   --include-namespaces production
 ```
 
----
+{{< /qa >}}
 
-### Q30 — What are CSI drivers and how do you use them?
+{{< qa num="30" q="What are CSI drivers and how do you use them?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team wants to use AWS EFS for shared storage (ReadWriteMany) across multiple pods.
 
@@ -2136,9 +2115,10 @@ spec:
           claimName: shared-storage  # All 5 replicas share this PVC
 ```
 
----
+{{< /qa >}}
 
-### Q31 — How do you handle storage for a StatefulSet across multiple AZs?
+
+{{< qa num="31" q="How do you handle storage for a StatefulSet across multiple AZs?" level="advanced" >}}
 
 > 🎯 **Scenario:** You're running a 3-node Elasticsearch cluster across 3 AZs. How do you ensure each node gets storage in the correct AZ?
 
@@ -2220,10 +2200,9 @@ volumeBindingMode: WaitForFirstConsumer   # ← Waits for pod to schedule, then 
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 ```
+{{< /qa >}}
 
----
-
-### Q32 — How do you migrate data from one PVC to another?
+{{< qa num="32" q="How do you migrate data from one PVC to another?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need to migrate your PostgreSQL data from a gp2 EBS volume to gp3 without any data loss or extended downtime.
 
@@ -2309,13 +2288,9 @@ EOF
 kubectl logs -f pvc-migrator -n production
 ```
 
----
+{{< /qa >}}
 
-## 🔴 Configuration & Secrets
-
----
-
-### Q33 — Difference between ConfigMaps and Secrets, and how to use them
+{{< qa num="33" q="Difference between ConfigMaps and Secrets, and how to use them" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your app needs both non-sensitive configuration (feature flags, timeouts) and sensitive data (DB credentials, API keys). How do you manage both?
 
@@ -2419,9 +2394,9 @@ spec:
 
 > ⚠️ **Kubernetes Secrets are only base64-encoded, NOT encrypted at rest!** Anyone with RBAC access to read secrets can decode them. For production: enable EncryptionConfiguration on etcd AND use External Secrets Operator with AWS Secrets Manager, GCP Secret Manager, or HashiCorp Vault.
 
----
+{{< /qa >}}
 
-### Q34 — How do you use External Secrets Operator with AWS Secrets Manager?
+{{< qa num="34" q="How do you use External Secrets Operator with AWS Secrets Manager?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your security policy forbids storing secrets in Kubernetes. All secrets must live in AWS Secrets Manager and be synced automatically.
 
@@ -2494,10 +2469,9 @@ kubectl get externalsecret database-credentials -n production
 
 kubectl describe externalsecret database-credentials -n production
 ```
+{{< /qa >}}
 
----
-
-### Q35 — How do you rotate secrets without downtime?
+{{< qa num="35" q="How do you rotate secrets without downtime?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your database password is compromised. You need to rotate it immediately with zero application downtime.
 
@@ -2545,9 +2519,9 @@ metadata:
     rotated-by: "security-team"
 ```
 
----
+{{< /qa >}}
 
-### Q36 — How do you manage environment-specific configs with Kustomize?
+{{< qa num="36" q="How do you manage environment-specific configs with Kustomize?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your base application YAML works for dev, but production needs 5 replicas, different resource limits, a different image tag, and production database URLs.
 
@@ -2655,9 +2629,9 @@ kubectl apply -k overlays/production/
 kubectl apply -k overlays/dev/
 ```
 
----
+{{< /qa >}}
 
-### Q37 — How do you enable encryption at rest for Kubernetes Secrets?
+{{< qa num="37" q="How do you enable encryption at rest for Kubernetes Secrets?" level="advanced" >}}
 
 > 🎯 **Scenario:** A security audit flags that Kubernetes Secrets are stored in plaintext in etcd. How do you fix this?
 
@@ -2713,9 +2687,9 @@ ETCDCTL_API=3 etcdctl get /registry/secrets/default/my-secret \
 # Should show: k8s:enc:aescbc:v1:key1:... (encrypted, not plaintext)
 ```
 
----
+{{< /qa >}}
 
-### Q38 — How do you use Sealed Secrets for GitOps-safe secret management?
+{{< qa num="38" q="How do you use Sealed Secrets for GitOps-safe secret management?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team uses GitOps (all config in Git), but Kubernetes Secrets can't be committed to Git as they're only base64-encoded. How do you solve this?
 
@@ -2773,13 +2747,9 @@ spec:
     type: Opaque
 ```
 
----
+{{< /qa >}}
 
-## 🟡 Scheduling & Resource Management
-
----
-
-### Q39 — How do resource requests and limits affect scheduling and stability?
+{{< qa num="39" q="How do resource requests and limits affect scheduling and stability?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your cluster nodes are running out of memory and pods are getting OOMKilled randomly. How do you properly configure resources?
 
@@ -2855,10 +2825,9 @@ kubectl get pods -A -o json | jq -r '
 kubectl top pods -A --sort-by=memory
 kubectl top nodes
 ```
+{{< /qa >}}
 
----
-
-### Q40 — How do you use node affinity, taints, and tolerations for workload placement?
+{{< qa num="40" q="How do you use node affinity, taints, and tolerations for workload placement?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have GPU nodes for ML and spot nodes for batch workloads. Critical services must run on on-demand nodes only.
 
@@ -2959,9 +2928,10 @@ spec:
             topologyKey: kubernetes.io/hostname
 ```
 
----
+{{< /qa >}}
 
-### Q41 — How does Horizontal Pod Autoscaler (HPA) work?
+
+{{< qa num="41" q="How does Horizontal Pod Autoscaler (HPA) work?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your API handles traffic spikes. You want it to scale from 2 to 20 pods based on CPU and a custom requests-per-second metric.
 
@@ -3043,9 +3013,8 @@ kubectl describe hpa api-hpa -n production
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
----
-
-### Q42 — How do you use KEDA for event-driven autoscaling?
+{{< /qa >}}
+{{< qa num="42" q="How do you use KEDA for event-driven autoscaling?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have a consumer pod that processes SQS messages. You want it to scale based on queue depth, including scaling to zero when the queue is empty.
 
@@ -3131,9 +3100,8 @@ spec:
       desiredReplicas: "3"
 ```
 
----
-
-### Q43 — How do you right-size pods using Vertical Pod Autoscaler (VPA)?
+{{< /qa >}}
+{{< qa num="43" q="How do you right-size pods using Vertical Pod Autoscaler (VPA)?" level="advanced" >}}
 
 > 🎯 **Scenario:** You suspect your pods are over-provisioned (costing money) or under-provisioned (causing OOMKills). How do you determine the right sizing?
 
@@ -3192,9 +3160,8 @@ kubectl describe vpa api-vpa -n production
 
 > ⚠️ **Don't use VPA + HPA on the same CPU/memory metric simultaneously** — they fight each other. Use VPA to right-size, then use HPA based on custom metrics (RPS, queue depth).
 
----
-
-### Q44 — How do you implement topology spread constraints for HA?
+{{< /qa >}}
+{{< qa num="44" q="How do you implement topology spread constraints for HA?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your 6-replica deployment must have exactly 2 pods per availability zone for fault tolerance.
 
@@ -3246,9 +3213,8 @@ kubectl get nodes -L topology.kubernetes.io/zone
 # Expected output: 2 pods in each of us-east-1a, us-east-1b, us-east-1c
 ```
 
----
-
-### Q45 — What is the Cluster Autoscaler and how does it work?
+{{< /qa >}}
+{{< qa num="45" q="What is the Cluster Autoscaler and how does it work?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your cluster runs out of nodes during peak hours, and pods sit Pending. But at night there are underutilized nodes wasting money.
 
@@ -3298,13 +3264,8 @@ kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 kubectl get events -n kube-system | grep cluster-autoscaler
 ```
 
----
-
-## 🩵 Security & RBAC
-
----
-
-### Q46 — How do you set up RBAC for a developer with read-only access?
+{{< /qa >}}
+{{< qa num="46" q="How do you set up RBAC for a developer with read-only access?" level="intermediate" >}}
 
 > 🎯 **Scenario:** A developer needs to view pods, logs, and deployments in the staging namespace but must not modify anything.
 
@@ -3378,10 +3339,8 @@ kubectl auth can-i exec pods \
 kubectl auth can-i --list --namespace=staging \
   --as=jane.doe@company.com
 ```
-
----
-
-### Q47 — How do you create a ServiceAccount with minimal AWS permissions using IRSA?
+{{< /qa >}}
+{{< qa num="47" q="How do you create a ServiceAccount with minimal AWS permissions using IRSA?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your app pod needs to read from an S3 bucket and write to DynamoDB. How do you give it AWS permissions without static credentials?
 
@@ -3463,9 +3422,8 @@ spec:
         # No AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY needed!
 ```
 
----
-
-### Q48 — How do you enforce Pod Security Standards?
+{{< /qa >}}
+{{< qa num="48" q="How do you enforce Pod Security Standards?" level="advanced" >}}
 
 > 🎯 **Scenario:** Security audit requires that no pods in production run as root, use privileged mode, or mount host paths.
 
@@ -3535,9 +3493,8 @@ spec:
     emptyDir: {}
 ```
 
----
-
-### Q49 — How do you audit who did what in your cluster?
+{{< /qa >}}
+{{< qa num="49" q="How do you audit who did what in your cluster?" level="advanced" >}}
 
 > 🎯 **Scenario:** Someone deleted a production deployment. How do you trace exactly who did it, when, and from where?
 
@@ -3596,9 +3553,8 @@ cat /var/log/kubernetes/audit.log | \
 # Output: {"time":"2024-01-15T14:23:07Z", "user":"john.doe", "userAgent":"kubectl/v1.28.0", "sourceIP":"10.0.1.5"}
 ```
 
----
-
-### Q50 — How do you use OPA/Gatekeeper to enforce custom policies?
+{{< /qa >}}
+{{< qa num="50" q="How do you use OPA/Gatekeeper to enforce custom policies?" level="advanced" >}}
 
 > 🎯 **Scenario:** You want to enforce that all pods have resource limits set, all images come from your private registry, and all namespaces have a required label.
 
@@ -3699,9 +3655,8 @@ spec:
     - "123456789.dkr.ecr.us-east-1.amazonaws.com/"
 ```
 
----
-
-### Q51 — How do you implement image scanning and signing in your pipeline?
+{{< /qa >}}
+{{< qa num="51" q="How do you implement image scanning and signing in your pipeline?" level="advanced" >}}
 
 > 🎯 **Scenario:** You want to prevent unscanned or unsigned container images from being deployed.
 
@@ -3755,10 +3710,8 @@ spec:
       with:
         key: k8s://cosign-keys/cosign-pub-key
 ```
-
----
-
-### Q52 — How do you set up network segmentation between namespaces?
+{{< /qa >}}
+{{< qa num="52" q="How do you set up network segmentation between namespaces?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have dev, staging, and production namespaces on the same cluster. Dev pods must not be able to talk to production services.
 
@@ -3809,13 +3762,8 @@ spec:
       port: 8080
 ```
 
----
-
-## 🩶 Observability & Troubleshooting
-
----
-
-### Q53 — How do you set up Prometheus + Grafana monitoring?
+{{< /qa >}}
+{{< qa num="53" q="How do you set up Prometheus + Grafana monitoring?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your cluster has no monitoring. Set up CPU, memory, pod health metrics with dashboards and alerts.
 
@@ -3905,9 +3853,8 @@ spec:
         summary: "Node {{ $labels.instance }} disk is {{ $value | humanizePercentage }} free"
 ```
 
----
-
-### Q54 — How do you debug a pod stuck in `Pending` state?
+{{< /qa >}}
+{{< qa num="54" q="How do you debug a pod stuck in Pending state?" level="intermediate" >}}
 
 > 🎯 **Scenario:** You deployed a new pod and it's been in Pending state for 10 minutes. How do you diagnose and fix it?
 
@@ -3967,9 +3914,8 @@ kubectl get limitrange -n <namespace>
 kubectl describe limitrange -n <namespace>
 ```
 
----
-
-### Q55 — How do you debug service connectivity issues?
+{{< /qa >}}
+{{< qa num="55" q="How do you debug service connectivity issues?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Pod A cannot connect to Service B in the same namespace. How do you diagnose the root cause?
 
@@ -4025,9 +3971,8 @@ tcpdump -i eth0 host service-b
 nmap -p 8080 service-b
 ```
 
----
-
-### Q56 — How do you investigate high memory or CPU usage?
+{{< /qa >}}
+{{< qa num="56" q="How do you investigate high memory or CPU usage?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Your cluster is slow and nodes are under pressure. How do you identify the culprit pods?
 
@@ -4086,9 +4031,8 @@ kubectl get pods -A --field-selector=status.phase=Succeeded -o json | \
   jq -r '.items[] | select(.status.startTime < "2024-01-14") | .metadata.namespace + "/" + .metadata.name'
 ```
 
----
-
-### Q57 — How do you do live debugging with ephemeral containers?
+{{< /qa >}}
+{{< qa num="57" q="How do you do live debugging with ephemeral containers?" level="advanced" >}}
 
 > 🎯 **Scenario:** A distroless production container has no shell or debugging tools. You need to debug it in production without restarting it.
 
@@ -4139,10 +4083,8 @@ kubectl patch pod <pod-name> -n production \
 
 kubectl attach <pod-name> -c debug -it
 ```
-
----
-
-### Q58 — How do you trace a slow request across multiple microservices?
+{{< /qa >}}
+{{< qa num="58" q="How do you trace a slow request across multiple microservices?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your API response time is 3 seconds. You have 5 microservices in the call chain. How do you find where the slowness is?
 
@@ -4214,9 +4156,8 @@ def get_orders():
         return result
 ```
 
----
-
-### Q59 — How do you implement log aggregation with Loki?
+{{< /qa >}}
+{{< qa num="59" q="How do you implement log aggregation with Loki?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team wants to search and correlate logs across hundreds of pods in Grafana (same tool you use for metrics).
 
@@ -4290,9 +4231,8 @@ rate({app="api-server"} |= "ERROR" [5m])
 {namespace="production"} | json | traceID = "abc123def456"
 ```
 
----
-
-### Q60 — How do you troubleshoot node-level issues?
+{{< /qa >}}
+{{< qa num="60" q="How do you troubleshoot node-level issues?" level="advanced" >}}
 
 > 🎯 **Scenario:** A node is in NotReady state and pods on it are being evicted. How do you investigate?
 
@@ -4346,13 +4286,11 @@ sudo systemctl restart kubelet
 sudo systemctl restart containerd
 ```
 
----
+{{< /qa >}}
 
-## 🟤 CI/CD & GitOps
 
----
+{{< qa num="61" q="How do you implement GitOps with ArgoCD?" level="advanced" >}}
 
-### Q61 — How do you implement GitOps with ArgoCD?
 
 > 🎯 **Scenario:** Your team wants every change to Kubernetes to go through Git — no manual `kubectl apply` in production.
 
@@ -4445,9 +4383,9 @@ spec:
     warn: true
 ```
 
----
+{{< /qa >}}
 
-### Q62 — How do you implement image promotion across environments?
+{{< qa num="62" q="How do you implement image promotion across environments?" level="advanced" >}}
 
 > 🎯 **Scenario:** After an image passes tests in staging, you want to automatically promote it to production without changing the manifest files.
 
@@ -4517,9 +4455,9 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-method: git        # Write tag to Git
 ```
 
----
+{{< /qa >}}
 
-### Q63 — How do you set up a complete Terraform + Kubernetes CI/CD pipeline?
+{{< qa num="63" q="How do you set up a complete Terraform + Kubernetes CI/CD pipeline?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team manages both AWS infrastructure (Terraform) and Kubernetes workloads (Helm charts) in the same repository. How do you automate deployments safely?
 
@@ -4627,9 +4565,9 @@ jobs:
         kubectl get pods -n production -l app=web-app
 ```
 
----
+{{< /qa >}}
 
-### Q64 — How do you implement blue-green deployments?
+{{< qa num="64" q="How do you implement blue-green deployments?" level="intermediate" >}}
 
 > 🎯 **Scenario:** You need an instant traffic switch to a new version with instant rollback capability — rolling update is too slow.
 
@@ -4722,10 +4660,9 @@ kubectl patch service web-app \
 # After successful validation: clean up blue
 kubectl delete deployment web-app-blue
 ```
+{{< /qa >}}
 
----
-
-### Q65 — How do you use Helm with multiple environments and secrets?
+{{< qa num="65" q="How do you use Helm with multiple environments and secrets?" level="advanced" >}}
 
 > 🎯 **Scenario:** You need to manage Helm deployments across dev, staging, and production with different values and encrypted secrets in each.
 
@@ -4816,9 +4753,9 @@ helmfile diff                         # Show pending changes
 helmfile apply --selector app=web-app # Apply specific release
 ```
 
----
+{{< /qa >}}
 
-### Q66 — How do you run database migrations safely in Kubernetes?
+{{< qa num="66" q="How do you run database migrations safely in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** Every deployment requires running database migrations. How do you ensure migrations run exactly once, in the right order, and deployments don't start if migrations fail?
 
@@ -4885,10 +4822,9 @@ kubectl logs -l job-name=db-migration -n production
 #   argocd.argoproj.io/hook: PreSync
 #   argocd.argoproj.io/hook-delete-policy: HookSucceeded
 ```
+{{< /qa >}}
 
----
-
-### Q67 — How do you test Kubernetes manifests in CI before deploying?
+{{< qa num="67" q="How do you test Kubernetes manifests in CI before deploying?" level="intermediate" >}}
 
 > 🎯 **Scenario:** Broken YAML or misconfigured manifests reach production, causing deployment failures. How do you catch these in CI?
 
@@ -4957,13 +4893,9 @@ jobs:
           --values charts/web-app/values-prod.yaml
 ```
 
----
+{{< /qa >}}
 
-## ⚡ Advanced & Production Patterns
-
----
-
-### Q68 — How do you implement pod topology spread with custom labels?
+{{< qa num="68" q="How do you implement pod topology spread with custom labels?" level="advanced" >}}
 
 > 🎯 **Scenario:** You have 12 pods and 4 nodes across 2 AZs. You want at most 2 pods per node and even distribution across AZs.
 
@@ -5012,10 +4944,9 @@ spec:
                   app: postgres
               topologyKey: kubernetes.io/hostname
 ```
+{{< /qa >}}
 
----
-
-### Q69 — How do you handle stateful applications with the Operator pattern?
+{{< qa num="69" q="How do you handle stateful applications with the Operator pattern?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team wants to run Kafka in Kubernetes with automatic partition rebalancing, rolling upgrades, and self-healing. Should you write a StatefulSet or use an Operator?
 
@@ -5096,9 +5027,9 @@ spec:
 
 > 💡 **When to use an Operator:** For complex stateful applications (Kafka, PostgreSQL, Elasticsearch, Redis) where the operational runbook has many steps. Check OperatorHub.io before writing your own.
 
----
+{{< /qa >}}
 
-### Q70 — How do you implement multi-tenancy in Kubernetes?
+{{< qa num="70" q="How do you implement multi-tenancy in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** You're building a SaaS platform where each customer gets an isolated environment on your Kubernetes cluster.
 
@@ -5164,9 +5095,9 @@ spec:
   parent: tenant-a   # Inherits RBAC from tenant-a namespace
 ```
 
----
+{{< /qa >}}
 
-### Q71 — How do you implement cost optimization in Kubernetes?
+{{< qa num="71" q="How do you implement cost optimization in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your AWS EKS bill is $60K/month. How do you reduce it by 30% without impacting production performance?
 
@@ -5266,9 +5197,9 @@ helm install descheduler kubernetes-sigs/descheduler \
 | Spot + Cluster Autoscaler for production batch | 40–60% |
 | Remove unused PVs and idle LoadBalancers | 5–10% |
 
----
+{{< /qa >}}
 
-### Q72 — How do you implement a service mesh with Istio?
+{{< qa num="72" q="How do you implement a service mesh with Istio?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your microservices need automatic mTLS, circuit breaking, retry logic, and distributed tracing without changing application code.
 
@@ -5348,9 +5279,9 @@ spec:
       version: v2.0
 ```
 
----
+{{< /qa >}}
 
-### Q73 — How do you manage cluster upgrades safely?
+{{< qa num="73" q="How do you manage cluster upgrades safely?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your EKS cluster is on K8s 1.26 and needs to upgrade to 1.28. How do you do it with zero downtime?
 
@@ -5415,9 +5346,9 @@ kubectl get nodes
 kubectl get pods -A | grep -v Running | grep -v Completed
 ```
 
----
+{{< /qa >}}
 
-### Q74 — How do you implement chaos engineering in Kubernetes?
+{{< qa num="74" q="How do you implement chaos engineering in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** You want to test your system's resilience by intentionally causing failures and verifying your application handles them gracefully.
 
@@ -5494,9 +5425,9 @@ spec:
   duration: "1m"
 ```
 
----
+{{< /qa >}}
 
-### Q75 — How do you implement GitOps with Flux?
+{{< qa num="75" q="How do you implement GitOps with Flux?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your team wants a lightweight GitOps solution that automatically syncs Git to the cluster without a UI dependency.
 
@@ -5581,9 +5512,9 @@ spec:
     timeout: 5m
 ```
 
----
+{{< /qa >}}
 
-### Q76 — How do you implement zero-downtime PostgreSQL operations in Kubernetes?
+{{< qa num="76" q="How do you implement zero-downtime PostgreSQL operations in Kubernetes?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your PostgreSQL StatefulSet needs maintenance (failover, upgrade, resize) without application downtime.
 
@@ -5636,10 +5567,9 @@ kubectl cnpg restart postgres-ha -n production      # Rolling restart
 kubectl exec -it postgres-ha-1 -n production -- \
   psql -c "SELECT * FROM pg_stat_replication;"
 ```
+{{< /qa >}}
 
----
-
-### Q77 — How do you implement Pod Disruption Budgets for production stability?
+{{< qa num="77" q="How do you implement Pod Disruption Budgets for production stability?" level="intermediate" >}}
 
 > 🎯 **Scenario:** During a cluster upgrade, Kubernetes drained 3 out of 4 pods of your API simultaneously, causing a brief outage.
 
@@ -5694,9 +5624,9 @@ kubectl drain node-1 --ignore-daemonsets
 
 > ✅ **Always create PDBs before cluster upgrades.** Node drain respects PDBs — if you can't drain without violating a PDB, the drain blocks until conditions are met (e.g., a pod is rescheduled on another node first).
 
----
+{{< /qa >}}
 
-### Q78 — How do you handle secrets rotation with zero downtime using Vault?
+{{< qa num="78" q="How do you handle secrets rotation with zero downtime using Vault?" level="advanced" >}}
 
 > 🎯 **Scenario:** Your app needs dynamic database credentials from HashiCorp Vault, rotated every hour, without pod restarts.
 
@@ -5769,9 +5699,9 @@ vault write database/roles/web-app \
   max_ttl="24h"
 ```
 
----
+{{< /qa >}}
 
-### Q79 — How do you implement resource quotas with priority classes?
+{{< qa num="79" q="How do you implement resource quotas with priority classes?" level="advanced" >}}
 
 > 🎯 **Scenario:** During a resource crunch, you want critical services to always get resources, and best-effort workloads to be evicted first.
 
@@ -5861,9 +5791,10 @@ spec:
       - critical-production
 ```
 
----
+{{< /qa >}}
 
-### Q80 — How do you design a production-ready Kubernetes cluster checklist?
+{{< qa num="80" q="How do you design a production-ready Kubernetes cluster checklist?" level="advanced" >}}
+
 
 > 🎯 **Scenario:** You're launching a new production Kubernetes cluster. What does your production-readiness checklist include?
 
@@ -6045,3 +5976,6 @@ TF_LOG=DEBUG kubectl apply -f file.yaml                  # Verbose kubectl
 ---
 
 *Good luck with your Kubernetes interviews! ☸️*
+
+{{< /qa >}}
+
